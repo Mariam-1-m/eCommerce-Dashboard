@@ -1,31 +1,62 @@
 @import "tailwindcss";
 
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+  /* 4 Background Colors */
+  --color-black: #020617;
+  --color-dark-gray: #0f172a;
+  --color-dark-gray-1: #1f2937;
+  --color-tomato: #ef4444;
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+  /* 16 Gradients */
+  --gradient-linear: linear-gradient(135deg, #0f172a, #111827 45%, #020617);
+  --gradient-linear-1: linear-gradient(to right bottom, #22d3ee, #0ea5e9, #4f46e5);
+  --gradient-linear-2: linear-gradient(to right bottom, #34d399, #14b8a6);
+  --gradient-linear-3: linear-gradient(to right bottom, #fbbf24, #f97316);
+  --gradient-linear-4: linear-gradient(to right bottom, #ec4899, #f43f5e);
+  --gradient-linear-5: linear-gradient(to right bottom, #22d3ee, #0ea5e9);
+  --gradient-linear-6: linear-gradient(to right bottom, #8b5cf6, #d946ef);
+  --gradient-linear-7: linear-gradient(to right bottom, #94a3b8, #475569);
+  --gradient-linear-8: linear-gradient(to right, #000000, #334155, #334155);
+  --gradient-linear-9: linear-gradient(to right bottom, #06b6d4, #2563eb);
+  --gradient-linear-10: linear-gradient(to right, #34d399, #14b8a6);
+  --gradient-linear-11: linear-gradient(to right, #fbbf24, #f97316);
+  --gradient-linear-12: linear-gradient(to right, #ec4899, #f43f5e);
+  --gradient-linear-13: linear-gradient(to right, #22d3ee, #0ea5e9);
+  --gradient-linear-14: linear-gradient(to right, #8b5cf6, #d946ef);
+  --gradient-linear-15: linear-gradient(to right, #94a3b8, #475569);
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* text colors */
+  --color-turquoise: #22d3ee;
+  --color-dark-gray: #94a3b8;
+  --color-pastel-orange: #fcd34d;
+  --color-medium-turquoise: #6ee7b7;
+  --color-sky-blue: #67e8f9;
+  --color-sky-blue-1: #7dd3fc;
+  --color-light-pink: #fda4af;
+  --color-light-gray: #cbd5e1;
+  --color-light-steel-blue: #c4b5fd;
+  --color-white-smoke: #f1f5f9;
+  --color-white: #ffffff;
+  --color-slate-gray: #64748b;
+
+  /* 5 CTA Colors */
+  --color-black: #000000;
+  --color-dark-gray: #0f172a;
+  --color-light-gray: #d1d5db;
+  --color-white-smoke: #f1f5f9;
+  --color-tomato: #ef4444;
+
+  /* 10 Border Colors */
+  --color-pastel-orange: #fcd34d;
+  --color-medium-turquoise: #6ee7b7;
+  --color-sky-blue: #7dd3fc;
+  --color-light-pink: #fda4af;
+  --color-light-gray: #cbd5e1;
+  --color-light-steel-blue: #c4b5fd;
+  --color-lavender: #e5e7eb;
+  --color-white-smoke: #f1f5f9;
+  --color-white: #ffffff;
+  --color-dark-gray: #1e293b;
 
   @media (max-width: 1024px) {
     font-size: 16px;
@@ -79,20 +110,24 @@ h1 {
   font-size: 56px;
   letter-spacing: -1.68px;
   margin: 32px 0;
+
   @media (max-width: 1024px) {
     font-size: 36px;
     margin: 20px 0;
   }
 }
+
 h2 {
   font-size: 24px;
   line-height: 118%;
   letter-spacing: -0.24px;
   margin: 0 0 8px;
+
   @media (max-width: 1024px) {
     font-size: 20px;
   }
 }
+
 p {
   margin: 0;
 }
