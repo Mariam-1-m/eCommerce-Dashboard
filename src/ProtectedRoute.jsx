@@ -1,18 +1,19 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 function ProtectedRoute({ children }) {
-  const isAuthenticated = true;
-  const navigate = useNavigate();
+  const token = localStorage.getItem("token");
+  const user = JSON.parse(localStorage.getItem("user"));
+  const isAuthenticated = !!token;
+  const isAdmin = user?.role === "admin";
 
-  useEffect(
-    function () {
-      if (!isAuthenticated) navigate("/login");
-    },
-    [isAuthenticated, navigate],
-  );
+  if (!isAuthenticated) {
+    return <Navigate replace to="/login" />;
+  }
+  if (!isAdmin) {
+    return <Navigate replace to="/" />;
+  }
 
-  return isAuthenticated ? children : null;
+  return children;
 }
 
 export default ProtectedRoute;
