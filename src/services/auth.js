@@ -11,7 +11,6 @@ const handleError = (error) => {
   return {
     message,
     success: false,
-    status: "error",
   };
 };
 

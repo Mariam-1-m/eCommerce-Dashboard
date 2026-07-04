@@ -1,7 +1,6 @@
-import toast from "react-hot-toast";
 import { Outlet } from "react-router-dom";
 
-function AppLayout({ children }) {
+function AppLayout() {
   return (
     <div>
       <header>Header</header>
