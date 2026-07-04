@@ -1,4 +1,9 @@
-import { BrowserRouter as Router , Navigate, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Navigate,
+  Route,
+  Routes,
+} from "react-router-dom";
 import Toaster from "react-hot-toast";
 import RootRedirect from "./RootRedirect";
 import ProtectedRoute from "./ProtectedRoute";
@@ -10,13 +15,8 @@ function App() {
     <>
       <Router>
         <Routes>
-          <Route
-            element={
-              <ProtectedRoute>
-                <AppLayout />
-              </ProtectedRoute>
-            }
-          >
+          <Route element={<ProtectedRoute />}>
+          <Route element={<AppLayout />}>
             <Route index element={<Navigate replace to="dashboard" />} />
             <Route path="dashboard" element={<h1>Dashboard</h1>} />
             <Route path="users" element={<h1>Users</h1>} />
@@ -26,6 +26,7 @@ function App() {
             <Route path="carts" element={<h1>Carts</h1>} />
             <Route path="wishlist" element={<h1>Wishlist</h1>} />
             <Route path="settings" element={<h1>Settings</h1>} />
+          </Route>
           </Route>
           <Route path="/login" element={<h1>Login page</h1>} />
           <Route path="/register" element={<h1>Register page</h1>} />
