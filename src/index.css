@@ -2,19 +2,12 @@
 
 :root {
   /* 4 Background Colors */
-  --color-black: #020617;
-  --color-dark-gray: #0f172a;
-  --color-dark-gray-1: #1f2937;
-  --color-tomato: #ef4444;
+  --background: #0d1527;
+  --foreground: #dee3f0;
 
   /* 16 Gradients */
   --gradient-linear: linear-gradient(135deg, #0f172a, #111827 45%, #020617);
-  --gradient-linear-1: linear-gradient(
-    to right bottom,
-    #22d3ee,
-    #0ea5e9,
-    #4f46e5
-  );
+  --gradient-linear-1: linear-gradient(to right bottom, #22d3ee, #0ea5e9, #4f46e5);
   --gradient-linear-2: linear-gradient(to right bottom, #34d399, #14b8a6);
   --gradient-linear-3: linear-gradient(to right bottom, #fbbf24, #f97316);
   --gradient-linear-4: linear-gradient(to right bottom, #ec4899, #f43f5e);
@@ -81,5 +74,20 @@
     --social-bg: rgba(47, 48, 58, 0.5);
     --shadow:
       rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+  }
+
+  #social .button-icon {
+    filter: invert(1) brightness(2);
+  }
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
   }
 }

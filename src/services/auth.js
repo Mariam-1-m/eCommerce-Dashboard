@@ -44,3 +44,19 @@ async function logoutRequest() {
     return handleError(error);
   }
 }
+
+export async function getAdmin() {
+    try {
+        const res = await api.get('/auth/me');
+        const data = res.data;
+
+        // 
+        if (!data.success) {
+            throw new Error(data.message)
+        }
+
+        return { user: data.user || {}, token: data.token || "" }
+    } catch (error) {
+        return handleError(error)
+    }
+}
