@@ -46,17 +46,16 @@ async function logoutRequest() {
 }
 
 export async function getAdmin() {
-    try {
-        const res = await api.get('/auth/me');
-        const data = res.data;
+  try {
+    const res = await api.get("/auth/me");
+    const data = res.data;
 
-        // 
-        if (!data.success) {
-            throw new Error(data.message)
-        }
-
-        return { user: data.user || {}, token: data.token || "" }
-    } catch (error) {
-        return handleError(error)
+    if (!data.success) {
+      throw new Error(data.message);
     }
+
+    return { user: data.user || {}, token: data.token || "" };
+  } catch (error) {
+    return handleError(error);
+  }
 }

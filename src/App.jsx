@@ -17,6 +17,7 @@ function App() {
         <AuthProvider>
           <Routes>
             <Route element={<ProtectedRoute />}>
+            <Route path="/" element={<Loader />} />
               <Route element={<AppLayout />}>
                 <Route index element={<Navigate replace to="dashboard" />} />
                 <Route path="dashboard" element={<h1>Dashboard</h1>} />
