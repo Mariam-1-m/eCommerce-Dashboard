@@ -1,85 +1,61 @@
 @import "tailwindcss";
 
-:root {
-  /* 4 Background Colors */
-  --color-black: #020617;
-  --color-dark-gray: #0f172a;
-  --color-dark-gray-1: #1f2937;
-  --color-tomato: #ef4444;
-
-  /* 16 Gradients */
-  --gradient-linear: linear-gradient(135deg, #0f172a, #111827 45%, #020617);
-  --gradient-linear-1: linear-gradient(
-    to right bottom,
-    #22d3ee,
-    #0ea5e9,
-    #4f46e5
-  );
-  --gradient-linear-2: linear-gradient(to right bottom, #34d399, #14b8a6);
-  --gradient-linear-3: linear-gradient(to right bottom, #fbbf24, #f97316);
-  --gradient-linear-4: linear-gradient(to right bottom, #ec4899, #f43f5e);
-  --gradient-linear-5: linear-gradient(to right bottom, #22d3ee, #0ea5e9);
-  --gradient-linear-6: linear-gradient(to right bottom, #8b5cf6, #d946ef);
-  --gradient-linear-7: linear-gradient(to right bottom, #94a3b8, #475569);
-  --gradient-linear-8: linear-gradient(to right, #000000, #334155, #334155);
-  --gradient-linear-9: linear-gradient(to right bottom, #06b6d4, #2563eb);
-  --gradient-linear-10: linear-gradient(to right, #34d399, #14b8a6);
-  --gradient-linear-11: linear-gradient(to right, #fbbf24, #f97316);
-  --gradient-linear-12: linear-gradient(to right, #ec4899, #f43f5e);
-  --gradient-linear-13: linear-gradient(to right, #22d3ee, #0ea5e9);
-  --gradient-linear-14: linear-gradient(to right, #8b5cf6, #d946ef);
-  --gradient-linear-15: linear-gradient(to right, #94a3b8, #475569);
-
-  /* text colors */
-  --color-turquoise: #22d3ee;
-  --color-dark-gray: #94a3b8;
-  --color-pastel-orange: #fcd34d;
-  --color-medium-turquoise: #6ee7b7;
-  --color-sky-blue: #67e8f9;
-  --color-sky-blue-1: #7dd3fc;
-  --color-light-pink: #fda4af;
-  --color-light-gray: #cbd5e1;
-  --color-light-steel-blue: #c4b5fd;
-  --color-white-smoke: #f1f5f9;
-  --color-white: #ffffff;
-  --color-slate-gray: #64748b;
-
-  /* 5 CTA Colors */
-  --color-black: #000000;
-  --color-dark-gray: #0f172a;
-  --color-light-gray: #d1d5db;
-  --color-white-smoke: #f1f5f9;
-  --color-tomato: #ef4444;
-
-  /* 10 Border Colors */
-  --color-pastel-orange: #fcd34d;
-  --color-medium-turquoise: #6ee7b7;
-  --color-sky-blue: #7dd3fc;
-  --color-light-pink: #fda4af;
-  --color-light-gray: #cbd5e1;
-  --color-light-steel-blue: #c4b5fd;
-  --color-lavender: #e5e7eb;
-  --color-white-smoke: #f1f5f9;
-  --color-white: #ffffff;
-  --color-dark-gray: #1e293b;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+:root {
+  --background: #0d1527;
+  --foreground: #dee3f0;
+}
+
+.light {
+  --background: #dee3f0;
+  --foreground: #0d1527;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
   }
 }

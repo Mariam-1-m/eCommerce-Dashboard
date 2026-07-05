@@ -3,15 +3,17 @@ import {
   Navigate,
   Route,
   Routes,
+  BrowserRouter,
 } from "react-router-dom";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import AppLayout from "./components/AppLayout";
 import "./App.css";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
     <>
-      <Router>
+      <BrowserRouter>
         <Routes>
           <Route element={<ProtectedRoute />}>
             <Route element={<AppLayout />}>
@@ -26,11 +28,12 @@ function App() {
               <Route path="settings" element={<h1>Settings</h1>} />
             </Route>
           </Route>
-          <Route path="login" element={<h1>Login page</h1>} />
-          <Route path="register" element={<h1>Register page</h1>} />
+          <Route path="/login" element={<h1>Login page</h1>} />
+          <Route path="/register" element={<h1>Register page</h1>} />
           <Route path="*" element={<h1>Page Not Found</h1>} />
         </Routes>
-      </Router>
+      </BrowserRouter>
+      <ToastContainer position="top-right" theme="colored" autoClose={2500} />
     </>
   );
 }
