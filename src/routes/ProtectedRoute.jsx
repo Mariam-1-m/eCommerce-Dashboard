@@ -2,20 +2,18 @@ import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../context/AuthContext.jsx";
 
 function ProtectedRoute() {
-  const token = localStorage.getItem("token");
-  const { user } = useAuth();
-  const isAuthenticated = !!token;
-  const isAdmin = user?.role === "admin";
+  const { user, checking } = useAuth();
 
-  if (!isAuthenticated) {
+  if (checking) return null; 
+
+  if (!user) {
     return <Navigate replace to="/login" />;
   }
 
-  if (!isAdmin) {
+  if (user.role !== "admin") {
     return <Navigate replace to="/" />;
   }
 
   return <Outlet />;
 }
-
 export default ProtectedRoute;

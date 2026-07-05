@@ -7,10 +7,12 @@ const AuthContext = createContext();
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [checking, setChecking] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
+      setChecking(false);
       return;
     }
     api
@@ -19,6 +21,8 @@ export function AuthProvider({ children }) {
       .catch((error) => {
         localStorage.removeItem("token");
         setUser(null);
+      }).finally(() => {
+        setChecking(false)
       });
   }, []);
 
