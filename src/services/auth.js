@@ -54,7 +54,7 @@ export async function getAdmin() {
       throw new Error(data.message);
     }
 
-    return { user: data.user || {}, token: data.token || "" };
+    return data;
   } catch (error) {
     return handleError(error);
   }
