@@ -59,3 +59,17 @@
     color: var(--color-foreground);
   }
 }
+
+.dark {
+  --bg-primary: #16171d;
+  --text-primary: #f3f4f6;
+  --border-main: #2e303a;
+}
+
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s, color 0.3s; 
+}
+

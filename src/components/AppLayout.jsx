@@ -1,13 +1,28 @@
 import { Outlet } from "react-router-dom";
+import Header from "./Header/Header"; // Adjust path if needed
+import { ThemeProvider } from "../context/ThemeContext";
+import { SidebarProvider } from "../context/SidebarContext";
+import Sidebar from "./Sidebar";
 
-function AppLayout() {
+
+
+export default function AppLayout() {
+  
+
   return (
-    <div>
-      <header>Header</header>
-      <Outlet />
-      <footer>Footer</footer>
+    <div className="app-container">
+      
+      <ThemeProvider>
+        <SidebarProvider>
+          <Sidebar/>
+          <>
+      <Header />
+      <main>
+        <Outlet />
+      </main>
+      </>
+      </SidebarProvider>
+      </ThemeProvider>
     </div>
   );
 }
-
-export default AppLayout;
