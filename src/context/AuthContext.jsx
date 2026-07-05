@@ -1,5 +1,5 @@
 // ** Created by omar samir **
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import api from "../lib/api";
 
 const AuthContext = createContext();
@@ -7,6 +7,20 @@ const AuthContext = createContext();
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      return;
+    }
+    api
+      .get("/auth/me")
+      .then(({ data }) => setUser(data.user))
+      .catch((error) => {
+        localStorage.removeItem("token");
+        setUser(null);
+      });
+  }, []);
 
   const login = async (email, password) => {
     try {
