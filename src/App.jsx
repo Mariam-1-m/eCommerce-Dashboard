@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import AppLayout from "./components/AppLayout";
-import { AuthProvider } from "./contexts/AuthContext";
+import { AuthProvider } from "./context/AuthContext";
 import "./App.css";
 import { ToastContainer } from "react-toastify";
 

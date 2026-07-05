@@ -3,7 +3,7 @@ import { LogOut, Moon, Sun, Bell,TextAlignJustify } from 'lucide-react';
 import { useContext, useState } from 'react';
 import { ThemeContext } from '../../contexts/ThemeContext';
 import { Navigate, useNavigate } from 'react-router-dom';
-import {useAuth}  from '../../contexts/AuthContext';
+import {useAuth}  from '../../context/AuthContext';
 
 import { SidebarContext } from '../../contexts/SidebarContext';
 
