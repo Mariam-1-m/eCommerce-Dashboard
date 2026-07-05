@@ -1,4 +1,3 @@
-// ** Created by omar samir **
 import { createContext, useContext, useState } from "react";
 import api from "../lib/api";
 
