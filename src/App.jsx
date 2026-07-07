@@ -10,6 +10,7 @@ import LoginPage from "./components/auth/LoginPage";
 import DashboardPage from "./components/dashboard/DashboardPage";
 import "./App.css";
 import { ToastContainer } from "react-toastify";
+import Loader from "./components/loader.jsx";
 
 function App() {
   return (
