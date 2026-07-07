@@ -1,0 +1,74 @@
+// ** Created by omar samir **
+import { createContext, useContext, useEffect, useState } from "react";
+import api from "../lib/api";
+
+const AuthContext = createContext();
+
+export function AuthProvider({ children }) {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [checking, setChecking] = useState(true);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setChecking(false);
+      return;
+    }
+    api
+      .get("/auth/me")
+      .then(({ data }) => setUser(data.user))
+      .catch((error) => {
+        localStorage.removeItem("token");
+        setUser(null);
+      }).finally(() => {
+        setChecking(false)
+      });
+  }, []);
+
+  const login = async (email, password) => {
+    try {
+      setLoading(true);
+
+      const { data } = await api.post("/auth/login", {
+        email,
+        password,
+      });
+
+      if (data.success) {
+        localStorage.setItem("token", data.token);
+        setUser(data.user);
+      }
+
+      return data;
+    } catch (error) {
+      return (
+        error.response?.data || {
+          success: false,
+          message: "Something went wrong",
+        }
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const logout = async () => {
+    try {
+      await api.post("/auth/logout");
+    } catch (e) {}
+
+    localStorage.removeItem("token");
+    setUser(null);
+  };
+
+  return (
+    <AuthContext.Provider
+      value={{ user, login, logout, loading, isAuthenticated: !!user }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
+}
+
+export const useAuth = () => useContext(AuthContext);
