@@ -3,7 +3,9 @@ import React from 'react'
 
 function EnteredDataSec() {
   return (
-    <section></section>
+    <div>
+      
+    </div>
   )
 }
 
