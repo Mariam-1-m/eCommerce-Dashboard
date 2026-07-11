@@ -1,10 +1,12 @@
 // Only Mazen can edit this file
 import { useState } from "react";
 import { Search, UserPlus, ChevronDown } from "lucide-react";
+import CreateUser from "./createUser.jsx";
 function UsersHeader() {
 
   const [clicked, setClicked] = useState(false)
   return (
+    <>
     <div className="rounded-2xl [background:var(--bg-gradient)] max-w-3xl md:mx-auto mt-2 p-5 mx-3">
       <p className="uppercase tracking-widest font-light text-sm text-cyan-400 ">
         User Management
@@ -33,6 +35,14 @@ function UsersHeader() {
         </button>
       </div>
     </div>
+
+
+  {clicked && (
+    <CreateUser />
+  )}
+
+
+    </>
   );
 }
 
