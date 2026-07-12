@@ -3,6 +3,7 @@
 import { ArrowLeft, Package2,ImagePlus ,Astroid,X} from "lucide-react";
 import React from "react";
 import {useState, useRef} from "react";
+import { toast } from "react-toastify";
 
 function ImgUploaderSec({onImagesChange}) {
 const fileInput=useRef(null);
@@ -12,6 +13,10 @@ const handleFileUpload=(e)=>{
   
  const files=Array.from(e.target.files);
 
+ if(images.length + files.length > 5){
+ toast.error("Maximum 5 images allowed")
+ return;
+}
  const newImages=(files.map((file,index)=>({
   file,
   preview:URL.createObjectURL(file),

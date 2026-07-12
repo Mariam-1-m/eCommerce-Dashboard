@@ -37,9 +37,26 @@ function EnteredDataSec({productImages, addProduct}) {
   }
         try{
 setLoading(true);
-    const productData = {...data, images: productImages, tags}
-    console.log(productData)
-    await addProduct(productData)
+    const formData = new FormData()
+    formData.append("name", data.name);
+formData.append("shortDescription", data.shortDescription);
+formData.append("description", data.description);
+formData.append("price", data.price);
+formData.append("discountPrice", data.discountPrice || "");
+formData.append("stock", data.stock);
+formData.append("sku", data.sku || "");
+formData.append("category", data.category);
+formData.append("subcategory", data.subcategory || "");
+formData.append("brand", data.brand || "");
+formData.append("featured", data.featured);
+formData.append("isActive", data.isActive);
+formData.append("tags", JSON.stringify(tags));
+
+productImages.forEach((image) => {
+  formData.append("images", image.file);
+});
+
+    await addProduct(formData)
      toast.success("Product created successfully.");
         }catch(err){
         toast.error("Something went wrong");
@@ -60,7 +77,7 @@ setLoading(true);
       <div>
         <p className="text-sm font-semibold">Product Name</p>
         <input
-        {...register("productName", {
+        {...register("name", {
           required: "Product name is required."
         })}
           type="text"
@@ -72,9 +89,13 @@ setLoading(true);
       <div className="mt-5">
         <p className="text-sm font-semibold">Short Description</p>
         <input
-         {...register("shortDescription", {
-          required: "Short description must be at least 10 characters."
-        })}
+         {...register("shortDescription",{
+ required:"Short description is required",
+ minLength:{
+   value:10,
+   message:"Short description must be at least 10 characters"
+ }
+})}
           type="text"
           className="pl-6 mt-3 dark:bg-slate-950 bg-slate-50 placeholder:text-slate-400 border dark:border-gray-800 border-slate-200 rounded-xl w-full p-2.5"
           placeholder="Minimum 10 characters"
@@ -85,8 +106,12 @@ setLoading(true);
         <p className="text-sm font-semibold">Description</p>
         <textarea
          {...register("description", {
-          required: "Description must be at least 20 characters."
-        })}
+ required:"Description is required",
+ minLength:{
+   value:20,
+   message:"Description must be at least 20 characters"
+ }
+})}
           type="text"
           rows={6}
           className="pl-6 dark:bg-slate-950 bg-slate-50 outline-none mt-3 placeholder:text-slate-400 border dark:border-gray-800 border-slate-200 rounded-xl w-full p-2.5"
@@ -98,9 +123,13 @@ setLoading(true);
         <div>
           <p className="text-sm font-semibold">Price</p>
           <input
-           {...register("price", {
-          required: "Price must be greater than 0."
-        })}
+            {...register("price", {
+            required: "Price is required.",
+            min: {
+            value: 1,
+            message: "Price must be greater than 0."
+            }
+            })}
             type="number"
             className="pl-6 mt-3 border dark:bg-slate-950 bg-slate-50 dark:border-gray-800 border-slate-200 rounded-xl w-full p-2.5"
           />
@@ -109,6 +138,7 @@ setLoading(true);
         <div>
           <p className="text-sm font-semibold">Discount Price</p>
           <input
+          {...register("discountPrice")}
             type="number"
             className="pl-6 mt-3 border dark:bg-slate-950 bg-slate-50 dark:border-gray-800 border-slate-200 rounded-xl w-full p-2.5"
           />
@@ -119,6 +149,13 @@ setLoading(true);
         <div>
           <p className="text-sm font-semibold">Stock</p>
           <input
+           {...register("stock",{
+ required:"Stock is required",
+ min:{
+   value:0,
+   message:"Stock cannot be negative"
+ }
+})}
             type="number"
             className="pl-6 mt-3 border dark:bg-slate-950 bg-slate-50 dark:border-gray-800 border-slate-200 rounded-xl w-full p-2.5"
           />
@@ -127,6 +164,7 @@ setLoading(true);
         <div>
           <p className="text-sm font-semibold">SKU</p>
           <input
+           {...register("sku")}
             type="text"
             className="pl-6 mt-3 border dark:bg-slate-950 bg-slate-50 dark:border-gray-800 border-slate-200 rounded-xl w-full p-2.5"
           />
@@ -137,7 +175,11 @@ setLoading(true);
         <div>
           <p className="text-sm font-semibold">Category</p>
           <div className="mt-3 relative">
-            <select className="appearance-none pl-6 dark:bg-slate-950 bg-slate-50 border dark:border-gray-800 border-slate-200 rounded-xl w-full p-2.5 outline-none">
+            <select
+            {...register("category", {
+            required: "Category is required."
+            })}
+            className="appearance-none pl-6 dark:bg-slate-950 bg-slate-50 border dark:border-gray-800 border-slate-200 rounded-xl w-full p-2.5 outline-none">
               <option value="electronics">electronics</option>
               <option value="phones">phones</option>
               <option value="fashion">fashion</option>
@@ -155,6 +197,7 @@ setLoading(true);
         <div>
           <p className="text-sm font-semibold">Subcategory</p>
           <input
+           {...register("subcategory")}
             type="text"
             className="pl-6 mt-3 dark:bg-slate-950 bg-slate-50 dark:border-gray-800 border-slate-200 rounded-xl w-full p-2.5"
           />
@@ -164,6 +207,7 @@ setLoading(true);
       <div className="mt-5">
         <p className="text-sm font-semibold">Brand</p>
         <input
+           {...register("brand")}
           type="text"
           className="pl-6 mt-3 dark:bg-slate-950 bg-slate-50 border dark:border-gray-800 border-slate-200 rounded-xl w-full p-2.5"
         />
@@ -202,12 +246,12 @@ setLoading(true);
 
       <div className="flex items-center gap-5 mt-5">
         <div className="flex items-center gap-3 border dark:bg-slate-950 bg-slate-50 dark:border-gray-800 border-slate-200 rounded-2xl py-3.5 px-5">
-          <input type="checkbox" className="accent-blue-300" />
+          <input {...register("featured")} type="checkbox" className="accent-blue-300" />
           <p className="font-semibold">Featured</p>
         </div>
 
         <div className="flex items-center gap-3 border dark:bg-slate-950 bg-slate-50 dark:border-gray-800 border-slate-200 rounded-2xl py-3.5 px-5">
-          <input type="checkbox" defaultChecked className="accent-blue-300" />
+          <input {...register("isActive")} type="checkbox" defaultChecked className="accent-blue-300" />
           <p className="font-semibold">Active</p>
         </div>
       </div>

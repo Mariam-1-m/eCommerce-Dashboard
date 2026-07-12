@@ -8,9 +8,8 @@ import api from "../lib/api.js"
 
 function AddProduct(){
   const [productImages, setProductImages] = useState([]);
-    const [products, setProducts] = useState([]);
-const addProduct = (product) => {
-  setProducts((prev)=> [...prev, product])
+const addProduct = (formData) => {
+   return api.post("/products", formData)
 }
 return(
 
