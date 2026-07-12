@@ -13,9 +13,12 @@ import Loader from "./components/loader";
 import DashboardPage from "./pages/DashboardPage";
 import LoginPage from "./pages/LoginPage";
 import NotFoundPage from "./pages/404";
-import UsersHeader from "./components/users/header.jsx";
-import SettingsPage from "./pages/SettingsPage.jsx"
-import AddProduct from "./pages/AddProduct.jsx"
+import ProductsPage from "./pages/ProductsPage";
+import AddProduct from "./pages/AddProduct"
+import UsersHeader from "./components/users/header"
+import ViewProductDetails from "./pages/ViewProductDetails"
+import  EditProductPage from "./pages/EditProductPage"
+import SettingsPage from "./pages/SettingsPage"
 
 function App() {
   return (
@@ -26,12 +29,14 @@ function App() {
             <Route element={<AppLayout />}>
               <Route index element={<Navigate replace to="dashboard" />} />
               <Route path="dashboard" element={<DashboardPage />} />
-              <Route path="users" element={<>
-                <UsersHeader />
-                users
-                </>} />
-              <Route path="products" element={<h1>Products</h1>} />
-              <Route path="products/add" element={<AddProduct />} />
+              <Route path="users" element={<UsersHeader />} />
+                <Route path="products">
+                <Route index element={<ProductsPage />} />
+                <Route path="view/:productId" element={<ViewProductDetails/>} />
+                <Route path="edit/:productId" element={< EditProductPage/>} />
+                <Route path="add" element={<AddProduct />} />
+              </Route>
+              
               <Route path="orders" element={<h1>Orders</h1>} />
               <Route path="carts" element={<h1>Carts</h1>} />
               <Route path="wishlist" element={<h1>Wishlist</h1>} />
