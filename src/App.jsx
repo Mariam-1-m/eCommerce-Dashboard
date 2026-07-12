@@ -15,6 +15,7 @@ import LoginPage from "./pages/LoginPage";
 import NotFoundPage from "./pages/404";
 import UsersHeader from "./components/users/header.jsx";
 import SettingsPage from "./pages/SettingsPage.jsx"
+import EnteredDataSec from "./components/add-products/enteredDataSec.jsx"
 
 function App() {
   return (
@@ -30,7 +31,10 @@ function App() {
                 users
                 </>} />
               <Route path="products" element={<h1>Products</h1>} />
-              <Route path="products/add" element={<h1>Add Products</h1>} />
+              <Route path="products/add" element={<>
+              Add Products
+              <EnteredDataSec />
+              </>} />
               <Route path="orders" element={<h1>Orders</h1>} />
               <Route path="carts" element={<h1>Carts</h1>} />
               <Route path="wishlist" element={<h1>Wishlist</h1>} />
