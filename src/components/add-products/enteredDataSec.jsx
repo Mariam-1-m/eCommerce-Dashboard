@@ -1,12 +1,33 @@
 // Only Mazen can edit this file
 import React, { useState } from "react";
-import { ChevronDown, Plus } from "lucide-react";
+import { ChevronDown, Plus, X } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
 
 function EnteredDataSec({productImages, addProduct}) {
       const [loading, setLoading] = useState(false);
+      const [tag, setTag] = useState("");
+      const [tags, setTags] = useState([]);
+
+
+      const handleClick = (e) => {
+        e.preventDefault();
+        if(tag.trim() === "") return
+        if(tags.includes(tag.trim())) {
+          setTag("")
+          return
+        }
+        setTags((prev)=> [...prev, tag.trim()])
+        setTag("")
+      }
+
+      const removeTags = (clickedTag) => {
+        const filteredTags = tags.filter((tag)=> tag !== clickedTag)
+        setTags(filteredTags)
+      }
+
+
   const {register,handleSubmit} = useForm();
 
   const onSubmit = async (data) => {
@@ -16,7 +37,7 @@ function EnteredDataSec({productImages, addProduct}) {
   }
         try{
 setLoading(true);
-    const productData = {...data, images: productImages}
+    const productData = {...data, images: productImages, tags}
     console.log(productData)
     await addProduct(productData)
      toast.success("Product created successfully.");
@@ -153,18 +174,30 @@ setLoading(true);
 
         <div className="flex gap-3 items-end">
           <input
+            onChange={(e)=> setTag(e.target.value)}
+            value={tag}
             type="text"
             className="pl-6 mt-2 dark:bg-slate-950 bg-white/90 placeholder:text-slate-400 border dark:border-gray-800 border-slate-200 rounded-xl w-full p-3"
             placeholder="Type a tag and press +"
           />
-          <button type="button" className="rounded-2xl dark:bg-gray-500 bg-gray-400 hover:bg-gray-400 flex items-center justify-center p-4">
+          <button onClick={handleClick} type="button" className="rounded-2xl dark:bg-gray-500 bg-gray-400 hover:bg-gray-400 flex items-center justify-center p-4">
             <Plus className="text-white"/>
           </button>
         </div>
 
-        <p className="text-slate-400 mt-3 text-sm">
-          Add one or more tags to organize the product.
-        </p>
+        
+          {tags.length === 0 ? (
+             <p className="text-slate-400 mt-3 text-sm">
+             Add one or more tags to organize the product.
+           </p>
+          ) : (
+            <div>
+            {tags.map((tag,index) => (
+               <div onClick={() => removeTags(tag)} className="cursor-pointer inline-block px-2.5 mx-1 mt-2 py-0.5 rounded-full hover:bg-gray-500/50 text-white bg-gray-500 text-sm font-medium" key={index}> <div className="flex items-center gap-1">#{tag} <X size={15}/></div> </div>
+            ) 
+            )}
+          </div>
+          )}
       </div>
 
       <div className="flex items-center gap-5 mt-5">
