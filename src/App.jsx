@@ -13,6 +13,7 @@ import Loader from "./components/loader";
 import DashboardPage from "./pages/DashboardPage";
 import LoginPage from "./pages/LoginPage";
 import NotFoundPage from "./pages/404";
+import ProductsPage from "./pages/ProductsPage";
 import AddProduct from "./pages/AddProduct"
 import SettingsPage from "./pages/SettingsPage"
 
@@ -26,7 +27,7 @@ function App() {
               <Route index element={<Navigate replace to="dashboard" />} />
               <Route path="dashboard" element={<DashboardPage />} />
               <Route path="users" element={<h1>Users</h1>} />
-              <Route path="products" element={<h1>Products</h1>} />
+              <Route path="products" element={<ProductsPage />} />
               <Route path="products/add" element={<AddProduct />} />
               <Route path="orders" element={<h1>Orders</h1>} />
               <Route path="carts" element={<h1>Carts</h1>} />
