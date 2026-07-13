@@ -5,7 +5,7 @@ import CreateUser from "./createUser.jsx";
 function UsersHeader() {
 
   const [clicked, setClicked] = useState(false)
-  const [users, setUsers] = useState("")
+  const [user, setUser] = useState("")
 
   // const filteredUsers = useMemo(() => {
   //     return 
@@ -22,7 +22,7 @@ function UsersHeader() {
         <div className="dark:bg-gray-800 bg-slate-50 relative w-full rounded-xl">
           <input
             type="text"
-            onChange={(e) => setUsers(e.target.value)}
+            onChange={(e) => setUser(e.target.value)}
             placeholder="Search users..."
             className="pl-8.5 placeholder:text-slate-400 border border-slate-200 dark:border-slate-700 focus:ring-2 rounded-xl outline-none focus:ring-cyan-500 w-full p-2.5"
           />
