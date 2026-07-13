@@ -1,10 +1,11 @@
+// Only omar-samir can edit this file
 import React, { useState, useEffect } from 'react';
 import { ArrowLeft, Eye } from 'lucide-react';
 import Loader from '../loader'
 export default function ProductsGallerySec() {
   const [isLoading, setIsLoading] = useState(true);
 
-  // Array of different car images for the gallery
+  // Array of different product images for the gallery
   const galleryImages = [
     "https://images.unsplash.com/photo-1617531653332-bd46c24f2068?q=80&w=2115&auto=format&fit=crop", // Black BMW (Original)
     "https://images.unsplash.com/photo-1556189250-72ba954cfc2b?q=80&w=2070&auto=format&fit=crop", // Grey BMW M4
@@ -12,7 +13,6 @@ export default function ProductsGallerySec() {
     "https://images.unsplash.com/photo-1555353540-64580b51c258?q=80&w=2078&auto=format&fit=crop"  // Another angle/car
   ];
 
-  // State to hold the currently selected image for the main view
   const [activeImage, setActiveImage] = useState(galleryImages[0]);
 
   // Simulate loading delay
@@ -95,6 +95,4 @@ export default function ProductsGallerySec() {
 
       </div>
     </div>
-  );
-}
-
+  ); }
