@@ -78,7 +78,7 @@ productImages.forEach((image) => {
   }
 }
   return (
-    <form onSubmit={handleSubmit(onSubmit,onError)} className="max-w-3xl bg-white/90 dark:bg-slate-900/60 rounded-3xl p-6 mx-auto mt-2.5">
+    <form onSubmit={handleSubmit(onSubmit,onError)} className="max-w-3xl  bg-white/90 dark:bg-slate-900/60 rounded-3xl p-6 mx-auto mt-2.5">
       <div>
         <p className="text-sm font-semibold">Product Name</p>
         <input

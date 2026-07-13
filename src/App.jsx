@@ -15,7 +15,7 @@ import LoginPage from "./pages/LoginPage";
 import NotFoundPage from "./pages/404";
 import ProductsPage from "./pages/ProductsPage";
 import AddProduct from "./pages/AddProduct"
-import UsersHeader from "./components/users/header"
+import UsersPage from "./pages/UsersPage"
 import ViewProductDetails from "./pages/ViewProductDetails"
 import  EditProductPage from "./pages/EditProductPage"
 import SettingsPage from "./pages/SettingsPage"
@@ -29,7 +29,7 @@ function App() {
             <Route element={<AppLayout />}>
               <Route index element={<Navigate replace to="dashboard" />} />
               <Route path="dashboard" element={<DashboardPage />} />
-              <Route path="users" element={<UsersHeader />} />
+              <Route path="users" element={<UsersPage />} />
                 <Route path="products">
                 <Route index element={<ProductsPage />} />
                 <Route path="view/:productId" element={<ViewProductDetails/>} />

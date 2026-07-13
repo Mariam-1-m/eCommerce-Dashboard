@@ -1,10 +1,12 @@
 // Only Mazen can edit this file
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Search, UserPlus, ChevronDown } from "lucide-react";
 import CreateUser from "./createUser.jsx";
-function UsersHeader() {
+
+function UsersHeader({setSearch}) {
 
   const [clicked, setClicked] = useState(false)
+
   return (
     <>
     <div className="rounded-2xl bg-white/90 dark:bg-slate-900/60 max-w-3xl md:mx-auto mt-2 p-5 mx-3">
@@ -17,6 +19,7 @@ function UsersHeader() {
         <div className="dark:bg-gray-800 bg-slate-50 relative w-full rounded-xl">
           <input
             type="text"
+            onChange={(e) => setSearch(e.target.value)}
             placeholder="Search users..."
             className="pl-8.5 placeholder:text-slate-400 border border-slate-200 dark:border-slate-700 focus:ring-2 rounded-xl outline-none focus:ring-cyan-500 w-full p-2.5"
           />

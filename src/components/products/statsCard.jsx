@@ -40,7 +40,7 @@ function ProductsStatsCard() {
     <section className="mx-9 mt-8">
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4">
         
-        <div className="rounded-2xl border border-[var(--border-main)] bg-[var(--bg-primary)] p-6 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-cyan-500/10">
+        <div className="rounded-2xl border border-[var(--border-main)]  bg-white/90 dark:bg-slate-900/60 p-6 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-cyan-500/10">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm text-[var(--text)]"> Total Products</p>
@@ -54,7 +54,7 @@ function ProductsStatsCard() {
           </div>
         </div>
         
-        <div className="rounded-2xl border border-[var(--border-main)] bg-[var(--bg-primary)] p-6 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-yellow-500/10">
+        <div className="rounded-2xl border border-[var(--border-main)] bg-white/90 dark:bg-slate-900/60 p-6 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-yellow-500/10">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm text-[var(--text)]">  Featured</p>
@@ -68,7 +68,7 @@ function ProductsStatsCard() {
           </div>
         </div>
         
-        <div className="rounded-2xl border border-[var(--border-main)] bg-[var(--bg-primary)] p-6 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-green-500/10">
+        <div className="rounded-2xl border border-[var(--border-main)] bg-white/90 dark:bg-slate-900/60  p-6 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-green-500/10">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm text-[var(--text)]">  In Stock  </p>
@@ -82,7 +82,7 @@ function ProductsStatsCard() {
           </div>
         </div>
         
-        <div className="rounded-2xl border border-[var(--border-main)] bg-[var(--bg-primary)] p-6 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-red-500/10">
+        <div className="rounded-2xl border border-[var(--border-main)] bg-white/90 dark:bg-slate-900/60 p-6 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-red-500/10">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm text-[var(--text)]">  Out of Stock  </p>
