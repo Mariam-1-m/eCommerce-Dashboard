@@ -19,6 +19,15 @@ function UsersPage() {
   const [users, setUsers] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
+  const [search, setSearch] = useState("")
+
+
+   const filteredUsers = useMemo(() => {
+    return users?.filter((u)=> 
+    u.username?.toLowerCase().includes(search.toLowerCase()) || u.email?.toLowerCase().includes(search.toLowerCase())
+    )
+  },[users,search])
+
 
   const fetchUsers = useCallback(async () => {
     setLoading(true)
@@ -125,7 +134,7 @@ function UsersPage() {
 
   return (
     <div className="pb-10">
-      <UsersHeader />
+      <UsersHeader setSearch={setSearch}/>
 
       <div className="mx-3 mt-6 space-y-6 md:mx-auto md:max-w-3xl">
         <UsersStatsCard stats={stats} loading={loading} />
@@ -154,7 +163,7 @@ function UsersPage() {
 
         {!error && !hasNoUsers ? (
           <UsersList
-            users={users}
+            users={filteredUsers}
             loading={loading}
             error=""
             onEditUser={handleEditUser}
