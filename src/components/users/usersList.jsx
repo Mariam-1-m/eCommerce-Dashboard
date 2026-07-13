@@ -218,18 +218,18 @@ function getRoleClasses(role) {
   const normalizedRole = role.toLowerCase()
 
   if (normalizedRole === 'admin') {
-    return 'bg-purple-500/20 text-purple-300'
+    return 'bg-purple-500/20 dark:text-purple-300 text-gray-800'
   }
 
   if (normalizedRole === 'manager') {
-    return 'bg-fuchsia-500/20 text-fuchsia-300'
+    return 'bg-fuchsia-500/20 dark:text-fuchsia-300 text-gray-800'
   }
 
   if (normalizedRole === 'support') {
-    return 'bg-amber-500/20 text-amber-300'
+    return 'bg-amber-500/20 dark:text-amber-300 text-gray-800'
   }
 
-  return 'bg-cyan-500/15 text-cyan-300'
+  return 'bg-cyan-500/15 dark:text-cyan-300 text-gray-800'
 }
 
 function getErrorMessage(error) {
@@ -364,9 +364,9 @@ function UsersList({
         </div>
       ) : null}
 
-      <div className="hidden overflow-x-auto rounded-2xl shadow-xl shadow-black/20 sm:block">
-        <div className="min-w-[620px] overflow-hidden rounded-2xl border border-slate-700/30 bg-[#0f172a]">
-          <div className="grid grid-cols-[minmax(250px,1fr)_110px_130px_118px] items-center bg-[#1e293b] px-4 py-3 text-[11px] font-semibold text-slate-300">
+      <div className="hidden overflow-x-auto rounded-2xl shadow-xl shadow-black/20 sm:block ">
+        <div className="min-w-[620px] overflow-hidden rounded-2xl border  border-slate-700/30 bg-white/90 dark:bg-[#111827]">
+          <div className="grid grid-cols-[minmax(250px,1fr)_110px_130px_118px] items-center  bg-white/90 dark:bg-[#111827] px-4 py-3 text-[11px] font-semibold text-gray-500 dark:text-slate-300">
             <span>User</span>
             <span>Role</span>
             <span>Verified</span>
@@ -398,12 +398,12 @@ function UsersList({
               {normalizedUsers.map((user) => (
                 <article
                   key={user.id}
-                  className="grid grid-cols-[minmax(250px,1fr)_110px_130px_118px] items-center bg-[#111827] px-4 py-3 text-sm transition duration-200 hover:bg-[#182337]"
+                  className="grid grid-cols-[minmax(250px,1fr)_110px_130px_118px] items-center bg-white/90 dark:bg-[#111827] px-4 py-3 text-sm transition duration-200 hover:bg-gray-200 dark:hover:bg-[#182337]"
                 >
                   <div className="flex min-w-0 items-center gap-3">
                     <UserAvatar user={user} />
                     <div className="min-w-0">
-                      <p className="truncate text-[13px] font-semibold leading-5 text-slate-100">
+                      <p className="truncate text-[13px] font-semibold leading-5 text-gray-800 dark:text-slate-100">
                         {user.name}
                       </p>
                       <p className="truncate text-[11px] text-slate-500">{user.email}</p>

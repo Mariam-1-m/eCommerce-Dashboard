@@ -109,14 +109,14 @@ function UsersStatsCard({ stats, loading = false, error = null }) {
         {STAT_ITEMS.map((item) => (
           <article
             key={item.key}
-            className="flex min-h-16 items-center justify-between gap-4 rounded-xl border border-slate-700/40 bg-[#111827] px-4 py-3 shadow-sm transition duration-200 hover:border-cyan-400/30 hover:bg-[#142033]"
+            className="flex min-h-16 items-center justify-between gap-4 rounded-xl border border-slate-700/40 bg-white/90 dark:bg-[#111827] px-4 py-3 shadow-md hover:shadow-gray-900 transition duration-200 hover:border-cyan-400/30 hover:bg-gray-200 dark:hover:bg-[#142033]"
           >
             <div className="min-w-0">
               <p className="text-[11px] font-medium text-slate-500">{item.label}</p>
               {loading ? (
                 <div className="mt-2 h-5 w-12 animate-pulse rounded bg-slate-700/70" />
               ) : (
-                <p className="mt-1 text-xl font-bold leading-none text-white">
+                <p className="mt-1 text-xl font-bold leading-none text:text-gray-800 dark:text-white">
                   {formatStat(statValues[item.key])}
                 </p>
               )}

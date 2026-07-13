@@ -12,14 +12,20 @@ function LoginForm() {
   const navigate = useNavigate();
   const [saving, setIsSaving] = useState(false);
 
-  const onSubmit = async (data) => {
-    setIsSaving(true)
+ const onSubmit = async (data) => {
+    try{
+      setIsSaving(true)
     const res = await login(data.email, data.password);
     if (res.success) {
       toast.success(res.message);
       navigate("/dashboard", { replace: true });
     } else {
       toast.error(res.message);
+    }
+    }catch(err){
+    toast.error("Something went wrong")
+    }finally{
+      setIsSaving(false)
     }
   };
 
