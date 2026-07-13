@@ -3,8 +3,9 @@
 import { ArrowLeft, Package2,ImagePlus ,Astroid,X} from "lucide-react";
 import React from "react";
 import {useState, useRef} from "react";
+import { toast } from "react-toastify";
 
-function ImgUploaderSec() {
+function ImgUploaderSec({onImagesChange}) {
 const fileInput=useRef(null);
 const [images,setImages]=useState([]);
 
@@ -12,6 +13,10 @@ const handleFileUpload=(e)=>{
   
  const files=Array.from(e.target.files);
 
+ if(images.length + files.length > 5){
+ toast.error("Maximum 5 images allowed")
+ return;
+}
  const newImages=(files.map((file,index)=>({
   file,
   preview:URL.createObjectURL(file),
@@ -19,17 +24,23 @@ const handleFileUpload=(e)=>{
  })
 ))
 
-setImages((prev=>[...prev,...newImages]))
+  const updatedImages = [...images ,...newImages]
+  setImages(updatedImages);
+if(onImagesChange){
+  onImagesChange(updatedImages)
+}
 
-console.log(images);
+console.log(updatedImages);
 }
 
 const removeImage=(index)=>{
-  setImages((prev)=>{
-   const filteredImages =prev.filter((_,i)=>i!==index)
-    URL.revokeObjectURL(prev[index].preview);
+   const filteredImages =images.filter((_,i)=>i!==index)
+    URL.revokeObjectURL(images[index].preview);
+      setImages(filteredImages);
+    if(onImagesChange){
+      onImagesChange(filteredImages)
+    }
     return filteredImages;
-  });
 }
 
   return (
