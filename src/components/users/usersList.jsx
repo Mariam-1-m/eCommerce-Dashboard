@@ -238,20 +238,45 @@ function getErrorMessage(error) {
   return error.message || 'Unable to load users.'
 }
 
+function getNextRole(role) {
+  const normalizedRole = role.toLowerCase()
+
+  if (normalizedRole === 'customer') return 'admin'
+  if (normalizedRole === 'admin') return 'customer'
+  return null
+}
+
+function getRoleToggleTitle(user, currentUserId) {
+  const nextRole = getNextRole(user.role)
+
+  if (!nextRole) {
+    return 'Only admin and customer roles can be toggled'
+  }
+
+  if (user.id === currentUserId && user.role.toLowerCase() === 'admin' && nextRole === 'customer') {
+    return 'You cannot demote your own admin account'
+  }
+
+  return nextRole === 'admin' ? 'Promote to admin' : 'Change to customer'
+}
+
 function UsersList({
   users,
   loading = false,
   error = null,
   onEditUser,
   onDeleteUser,
-  onToggleVerification,
+  onToggleRole,
+  currentUserId,
 }) {
   const [localUsers, setLocalUsers] = useState(() => (Array.isArray(users) ? users : MOCK_USERS))
   const [editingUser, setEditingUser] = useState(null)
   const [editForm, setEditForm] = useState({ username: '', phone: '', avatar: '' })
   const [actionError, setActionError] = useState('')
+  const [actionSuccess, setActionSuccess] = useState('')
   const [savingEdit, setSavingEdit] = useState(false)
   const [deletingUserId, setDeletingUserId] = useState(null)
+  const [roleUpdatingUserId, setRoleUpdatingUserId] = useState(null)
 
   useEffect(() => {
     setLocalUsers(Array.isArray(users) ? users : MOCK_USERS)
@@ -284,6 +309,7 @@ function UsersList({
 
   const handleOpenEdit = (user) => {
     setActionError('')
+    setActionSuccess('')
     setEditingUser(user)
     setEditForm({
       username: user.username || user.name,
@@ -304,6 +330,7 @@ function UsersList({
 
     setSavingEdit(true)
     setActionError('')
+    setActionSuccess('')
 
     try {
       const apiUser = onEditUser ? await onEditUser(editingUser.raw, nextFields) : null
@@ -318,6 +345,7 @@ function UsersList({
       }
 
       setEditingUser(null)
+      setActionSuccess('User updated successfully.')
       return updatedUser
     } catch (err) {
       setActionError(getErrorMessage(err))
@@ -334,6 +362,7 @@ function UsersList({
 
     setDeletingUserId(user.id)
     setActionError('')
+    setActionSuccess('')
 
     try {
       if (onDeleteUser) {
@@ -343,10 +372,44 @@ function UsersList({
       setLocalUsers((currentUsers) =>
         currentUsers.filter((item, index) => normalizeUser(item, index).id !== user.id),
       )
+      setActionSuccess('User deleted successfully.')
     } catch (err) {
       setActionError(getErrorMessage(err))
     } finally {
       setDeletingUserId(null)
+    }
+  }
+
+  const handleRoleToggle = async (user) => {
+    const nextRole = getNextRole(user.role)
+
+    if (!nextRole) return
+
+    if (user.id === currentUserId && user.role.toLowerCase() === 'admin' && nextRole === 'customer') {
+      setActionError('You cannot demote your own admin account.')
+      setActionSuccess('')
+      return
+    }
+
+    setRoleUpdatingUserId(user.id)
+    setActionError('')
+    setActionSuccess('')
+
+    try {
+      if (!onToggleRole) {
+        throw new Error('Role toggle action is not available.')
+      }
+
+      await onToggleRole(user.raw, nextRole)
+      setActionSuccess(
+        nextRole === 'admin'
+          ? `${user.name} was promoted to admin.`
+          : `${user.name} was changed to customer.`,
+      )
+    } catch (err) {
+      setActionError(getErrorMessage(err))
+    } finally {
+      setRoleUpdatingUserId(null)
     }
   }
 
@@ -361,6 +424,12 @@ function UsersList({
       {actionError ? (
         <div className="mb-3 rounded-lg border border-red-400/20 bg-red-500/10 px-4 py-3 text-sm text-red-200">
           {actionError}
+        </div>
+      ) : null}
+
+      {actionSuccess ? (
+        <div className="mb-3 rounded-lg border border-emerald-400/20 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-200">
+          {actionSuccess}
         </div>
       ) : null}
 
@@ -432,9 +501,16 @@ function UsersList({
                       <PencilIcon />
                     </IconButton>
                     <IconButton
-                      label="Verification endpoint is not documented"
+                      label={roleUpdatingUserId === user.id ? 'Updating role...' : getRoleToggleTitle(user, currentUserId)}
                       className="bg-emerald-500 hover:bg-emerald-500"
-                      disabled
+                      onClick={() => handleRoleToggle(user)}
+                      disabled={
+                        roleUpdatingUserId === user.id ||
+                        !getNextRole(user.role) ||
+                        (user.id === currentUserId &&
+                          user.role.toLowerCase() === 'admin' &&
+                          getNextRole(user.role) === 'customer')
+                      }
                     >
                       <ShieldIcon />
                     </IconButton>
@@ -502,7 +578,18 @@ function UsersList({
                   <IconButton label={`Edit ${user.name}`} className="bg-blue-500 hover:bg-blue-400" onClick={() => handleOpenEdit(user)}>
                     <PencilIcon />
                   </IconButton>
-                  <IconButton label="Verification endpoint is not documented" className="bg-emerald-500 hover:bg-emerald-500" disabled>
+                  <IconButton
+                    label={roleUpdatingUserId === user.id ? 'Updating role...' : getRoleToggleTitle(user, currentUserId)}
+                    className="bg-emerald-500 hover:bg-emerald-500"
+                    onClick={() => handleRoleToggle(user)}
+                    disabled={
+                      roleUpdatingUserId === user.id ||
+                      !getNextRole(user.role) ||
+                      (user.id === currentUserId &&
+                        user.role.toLowerCase() === 'admin' &&
+                        getNextRole(user.role) === 'customer')
+                    }
+                  >
                     <ShieldIcon />
                   </IconButton>
                   <IconButton
