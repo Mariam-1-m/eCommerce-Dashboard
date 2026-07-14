@@ -3,7 +3,7 @@ import React from 'react'
 
 function OrdersHeader() {
     return (
-        <>
+        <div className='p-15'>
          
 
 <div className='flex items-center justify-between mb-5'>
@@ -95,7 +95,7 @@ className='w-full rounded-lg border border-slate-200 h-9 bg-white pl-9 pr-3 text
 </div>
 
 
-        </>
+        </div>
     )
 }
 
