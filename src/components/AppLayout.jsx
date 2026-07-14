@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Header from "./header";
 import { SidebarContext } from "../contexts/SidebarContext";
-import Sidebar from "./sidebar";
+import Sidebar from "./Sidebar";
 
 function AppLayout() {
   return (

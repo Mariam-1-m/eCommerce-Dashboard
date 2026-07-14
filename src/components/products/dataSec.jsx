@@ -1,35 +1,15 @@
-import { useEffect, useState } from "react";
 import { ShoppingBag, Star, Tag } from "lucide-react";
-import { getProduct } from "../../services/productsApi";
-import Loader from "../loader";
-import NotFoundPage from "../../pages/404";
-import { useParams } from "react-router-dom";
 
-function ProductsDataSec() {
-  const [product, setProduct] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const { productId } = useParams();
-
-  useEffect(() => {
-    async function fetchProduct() {
-      try {
-        setIsLoading(true);
-        const data = await getProduct(productId);
-
-        if (data.success) setProduct(data.product);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-    fetchProduct();
-  }, []);
-
-  if (isLoading && !product) return <Loader />;
-
-  if (!isLoading && !product) return <NotFoundPage />;
-
+function ProductsDataSec({ product }) {
   const cardClass =
     "rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-900/60 backdrop-blur-2xl shadow-xl shadow-slate-900/5 p-5";
+
+  const stats = [
+    { title: "Price", value: `$${product.price}` },
+    { title: "Discount", value: `$${product.discountPrice}` },
+    { title: "Stock", value: product.stock },
+    { title: "SKU", value: product.sku },
+  ];
 
   return (
     <section className="space-y-5">
@@ -39,30 +19,14 @@ function ProductsDataSec() {
         <span className="">{product.description}</span>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className={cardClass}>
-          <p className="uppercase text-slate-500 dark:text-slate-400 text-xs mb-2">
-            price
-          </p>
-          <h4 className="text-xl font-bold ">${product.price}</h4>
-        </div>
-        <div className={cardClass}>
-          <p className="uppercase text-slate-500 dark:text-slate-400 text-xs mb-2">
-            discount
-          </p>
-          <h4 className="text-xl font-bold ">${product.discountPrice}</h4>
-        </div>
-        <div className={cardClass}>
-          <p className="uppercase text-slate-500 dark:text-slate-400 text-xs mb-2">
-            stock
-          </p>
-          <h4 className="text-xl font-bold ">{product.stock}</h4>
-        </div>
-        <div className={cardClass}>
-          <p className="uppercase text-slate-500 dark:text-slate-400 text-xs mb-2">
-            sku
-          </p>
-          <h4 className="text-xl font-bold ">{product.sku}</h4>
-        </div>
+        {stats.map((item) => (
+          <div key={item.title} className={cardClass}>
+            <p className="uppercase text-slate-500 dark:text-slate-400 text-xs mb-2">
+              {item.title}
+            </p>
+            <h4 className="text-xl font-bold ">{item.value}</h4>
+          </div>
+        ))}
       </div>
       {product.tags.length > 0 && (
         <div className={cardClass}>
