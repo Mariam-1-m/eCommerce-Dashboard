@@ -6,7 +6,7 @@ function OrdersHeader() {
         <>
          
 
-<div className='flex items-center justify-between'>
+<div className='flex items-center justify-between mb-5'>
 <div>
 <p className='text-[10px] text-slate-400 uppercase font-bold tracking-[0.2em]'>Admin · Management</p>
 <p className='text-3xl font-bold dark:text-white pt-0.5'>Orders</p>
