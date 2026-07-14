@@ -10,8 +10,10 @@ function LoginForm() {
   const { register, handleSubmit } = useForm();
   const [showPass, setShowPass] = useState(false);
   const navigate = useNavigate();
+  const [saving, setIsSaving] = useState(false);
 
   const onSubmit = async (data) => {
+    setIsSaving(true)
     const res = await login(data.email, data.password);
     if (res.success) {
       toast.success(res.message);
@@ -89,10 +91,12 @@ function LoginForm() {
 
         <div className="space-y-4 pt-2">
           <button
+            disabled={saving}
+            onDoubleClick={() => null}
             type="submit"
             className="w-full flex justify-center items-center rounded-xl bg-blue-600 hover:bg-blue-500 active:scale-[0.99] py-3 text-sm font-semibold tracking-wide text-white transition-all shadow-md shadow-blue-500/10 hover:shadow-lg hover:shadow-blue-500/20 disabled:opacity-50 disabled:pointer-events-none cursor-pointer"
           >
-            Sign In
+            {saving ? "Signing In" : "Sign In"}
           </button>
 
           <div className="flex items-center gap-3">

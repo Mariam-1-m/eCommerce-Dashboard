@@ -13,8 +13,12 @@ import Loader from "./components/loader";
 import DashboardPage from "./pages/DashboardPage";
 import LoginPage from "./pages/LoginPage";
 import NotFoundPage from "./pages/404";
-import QuickGallerySec from "./QuickGallerySec";
-
+import ProductsPage from "./pages/ProductsPage";
+import AddProduct from "./pages/AddProduct"
+import UsersPage from "./pages/UsersPage"
+import ViewProductDetails from "./pages/ViewProductDetails"
+import  EditProductPage from "./pages/EditProductPage"
+import SettingsPage from "./pages/SettingsPage"
 function App() {
   return (
     <>
@@ -24,13 +28,18 @@ function App() {
             <Route element={<AppLayout />}>
               <Route index element={<Navigate replace to="dashboard" />} />
               <Route path="dashboard" element={<DashboardPage />} />
-              <Route path="users" element={<h1>Users</h1>} />
-              <Route path="products" element={<h1>Products</h1>} />
-              <Route path="products/add" element={<h1>Add Products</h1>} />
+              <Route path="users" element={<UsersPage />} />
+                <Route path="products">
+                <Route index element={<ProductsPage />} />
+                <Route path="view/:productId" element={<ViewProductDetails/>} />
+                <Route path="edit/:productId" element={< EditProductPage/>} />
+                <Route path="add" element={<AddProduct />} />
+              </Route>
+              
               <Route path="orders" element={<h1>Orders</h1>} />
               <Route path="carts" element={<h1>Carts</h1>} />
               <Route path="wishlist" element={<h1>Wishlist</h1>} />
-              <Route path="settings" element={<h1>Settings</h1>} />
+              <Route path="settings" element={<SettingsPage/>} />
             </Route>
           </Route>
           <Route path="/login" element={<LoginPage />} />
@@ -41,5 +50,6 @@ function App() {
     </>
   );
 }
+
 
 export default App;

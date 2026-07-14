@@ -3,17 +3,18 @@ import { toast } from "react-toastify";
 import { useAuth } from "../hooks/useAuth";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { SidebarContext } from "../contexts/SidebarContext";
-import { useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 
-export default function Header() {
+ function Header() {
   const { theme, toggleTheme } = useContext(ThemeContext);
   const { toggleSidebar } = useContext(SidebarContext);
   const isLight = theme === "light";
   const [isNavExpanded, setIsNavExpanded] = useState(true);
 
   const { logout, user } = useAuth();
-
-  const handleLogout = async () => {
+  const [saving, setIsSaving] = useState(false);
+  const handleLogout = async (e) => {
+    setIsSaving(true)
     const res = await logout();
     if (res.success) {
       toast.success(res.message);
@@ -23,16 +24,16 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200/80 bg-white/80 backdrop-blur-md dark:border-slate-800/80 dark:bg-slate-950/20">
       <div className="flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
-        
+
         <div className="flex items-center gap-4">
-          <button 
-            onClick={toggleSidebar} 
+          <button
+            onClick={toggleSidebar}
             className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-600 shadow-xs transition-all hover:bg-slate-50 hover:text-slate-900 focus:outline-hidden focus:ring-2 focus:ring-cyan-500/20 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-100 lg:hidden"
             aria-label="Toggle Sidebar"
           >
             <Menu size={18} />
           </button>
-          
+
           <div className="flex items-center gap-3">
             <div className="flex h-12 w-20 items-center justify-center rounded-xl bg-slate-100 dark:bg-slate-900 p-1.5">
               <img
@@ -53,7 +54,7 @@ export default function Header() {
         </div>
 
         <div className="flex items-center gap-2 sm:gap-3">
-          
+
           <button className="relative flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-600 shadow-xs transition-all hover:bg-slate-50 hover:text-slate-900 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-100">
             <Bell size={18} />
             <span className="absolute right-2.5 top-2.5 flex h-2 w-2">
@@ -94,23 +95,20 @@ export default function Header() {
           )}
 
           <button
+            disabled={saving}
             onClick={handleLogout}
+            onDoubleClick={() => null}
             className="hidden md:flex items-center gap-2 rounded-xl bg-slate-100 px-4 py-2 text-xs font-semibold text-slate-700 transition-all hover:bg-red-50 hover:text-red-600 dark:bg-slate-900 dark:text-slate-300 dark:hover:bg-red-950/40 dark:hover:text-red-400"
           >
             <LogOut size={14} />
-            Logout
+            {saving ? "login out" : "Logout"}
           </button>
 
-          <button 
-            onClick={handleLogout}
-            aria-label="Logout"
-            className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-100 text-slate-600 transition-all hover:bg-red-50 hover:text-red-600 dark:bg-slate-900 dark:text-slate-400 dark:hover:bg-red-950/40 dark:hover:text-red-400 md:hidden"
-          >
-            <LogOut size={18} />
-          </button>
 
         </div>
       </div>
     </header>
   );
 }
+
+export default React.memo(Header)

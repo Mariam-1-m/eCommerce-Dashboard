@@ -39,7 +39,7 @@
 .light {
   --bg-primary: #f3f4f6;
   --text-primary: #16171d;
-  --background: #fff;
+  --background: #ffffff;
   --border-main: #eeeeee;
 }
 
@@ -49,6 +49,8 @@
   --border-main: #2e303a;
   --background: #16171d;
 }
+
+
 
 @layer base {
   body {
