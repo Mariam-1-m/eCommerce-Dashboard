@@ -3,6 +3,7 @@ import UsersHeader from '../components/users/header'
 import UsersStatsCard from '../components/users/statsCard'
 import UsersList from '../components/users/usersList'
 import api from '../lib/api'
+import { useAuth } from '../hooks/useAuth'
 
 const USERS_ENDPOINT = 'https://e-commerce-api-3wara.vercel.app/users/all'
 
@@ -16,6 +17,7 @@ function getApiErrorMessage(error) {
 }
 
 function UsersPage() {
+  const { user: currentUser } = useAuth()
   const [users, setUsers] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
@@ -29,8 +31,10 @@ function UsersPage() {
   },[users,search])
 
 
-  const fetchUsers = useCallback(async () => {
-    setLoading(true)
+  const fetchUsers = useCallback(async ({ showLoading = true, throwOnError = false } = {}) => {
+    if (showLoading) {
+      setLoading(true)
+    }
     setError('')
 
     try {
@@ -42,11 +46,25 @@ function UsersPage() {
       }
 
       setUsers(Array.isArray(data.users) ? data.users : [])
+      return data.users
     } catch (err) {
-      setUsers([])
-      setError(getApiErrorMessage(err))
+      const message = getApiErrorMessage(err)
+
+      if (showLoading) {
+        setUsers([])
+      }
+
+      setError(message)
+
+      if (throwOnError) {
+        throw new Error(message)
+      }
+
+      return []
     } finally {
-      setLoading(false)
+      if (showLoading) {
+        setLoading(false)
+      }
     }
   }, [])
 
@@ -130,7 +148,44 @@ function UsersPage() {
     return data.user
   }
 
+  const handleToggleRole = async (user, nextRole) => {
+    const userId = user?._id || user?.id
+    const currentUserId = currentUser?._id || currentUser?.id
+    const currentRole = String(user?.role || '').toLowerCase()
+
+    if (!userId) {
+      throw new Error('User id is missing.')
+    }
+
+    if (!['admin', 'customer'].includes(nextRole)) {
+      throw new Error('Unsupported role.')
+    }
+
+    if (userId === currentUserId && currentRole === 'admin' && nextRole === 'customer') {
+      throw new Error('You cannot demote your own admin account.')
+    }
+
+    const response = await api.patch(
+      '/auth/change-role',
+      {
+        userId,
+        role: nextRole,
+      },
+      { withCredentials: true },
+    )
+    const data = response.data
+
+    if (!data?.success) {
+      throw new Error(data?.message || 'Unable to update user role.')
+    }
+
+    await fetchUsers({ showLoading: false, throwOnError: true })
+
+    return data
+  }
+
   const hasNoUsers = !loading && !error && users.length === 0
+  const currentUserId = currentUser?._id || currentUser?.id
 
   return (
     <div className="pb-10 pt-8">
@@ -168,6 +223,8 @@ function UsersPage() {
             error=""
             onEditUser={handleEditUser}
             onDeleteUser={handleDeleteUser}
+            onToggleRole={handleToggleRole}
+            currentUserId={currentUserId}
           />
         ) : null}
       </div>

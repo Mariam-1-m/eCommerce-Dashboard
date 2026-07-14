@@ -7,7 +7,7 @@ function ProductsPage() {
     <>
      <ProductsHeader />
      <ProductsStatsCard />
-   
+     
      </>
   )
 }
