@@ -3,7 +3,9 @@ import React from 'react'
 
 function ProductsDataSec() {
   return (
-    <section></section>
+    <section>
+      
+    </section>
   )
 }
 

@@ -14,6 +14,7 @@ import DashboardPage from "./pages/DashboardPage";
 import LoginPage from "./pages/LoginPage";
 import NotFoundPage from "./pages/404";
 import AddProduct from "./pages/AddProduct"
+import QuickProductDataSec from "./components/products/quickProductDataSec"; 
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
               <Route path="users" element={<h1>Users</h1>} />
               <Route path="products" element={<h1>Products</h1>} />
               <Route path="products/add" element={<AddProduct />} />
+              <Route path="products/quickProduct/:id" element={<QuickProductDataSec/>} />
               <Route path="orders" element={<h1>Orders</h1>} />
               <Route path="carts" element={<h1>Carts</h1>} />
               <Route path="wishlist" element={<h1>Wishlist</h1>} />
