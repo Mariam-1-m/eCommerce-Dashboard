@@ -1,13 +1,31 @@
  
 
 import { ArrowLeft, Package2,ImagePlus ,Astroid,X} from "lucide-react";
-import React from "react";
+import React, { useEffect } from "react";
 import {useState, useRef} from "react";
 import { toast } from "react-toastify";
 
-function EditProductImgUploader({onImagesChange}) {
+function EditProductImgUploader({onImagesChange, product}) {
 const fileInput=useRef(null);
 const [images,setImages]=useState([]);
+
+
+useEffect(()=>{
+  if(product?.images){
+   const oldImages = product.images.map((image,index)=> (
+    {
+      file: null,
+      preview: image.url,
+      num: index + 1,
+    }
+   ))
+   setImages(oldImages);
+   if(onImagesChange){
+      onImagesChange(oldImages);
+    }
+  }
+},[product])
+
 
 const handleFileUpload=(e)=>{
   

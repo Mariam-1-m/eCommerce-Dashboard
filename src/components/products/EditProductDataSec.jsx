@@ -1,12 +1,13 @@
  
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ChevronDown, Plus, X } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { replace, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 
-function EditProductDataSec({productImages, addProduct}) {
+function EditProductDataSec({productImages, updateProduct, product}) {
       const [loading, setLoading] = useState(false);
       const [tag, setTag] = useState("");
       const [tags, setTags] = useState([]);
@@ -30,7 +31,33 @@ const navigate = useNavigate();
       }
 
 
-  const {register,handleSubmit} = useForm();
+  const {register,handleSubmit, reset} = useForm();
+
+  useEffect(() => {
+  if(product){
+    reset({
+  name: product.name,
+  shortDescription: product.shortDescription,
+  description: product.description,
+  price: product.price,
+  discountPrice: product.discountPrice,
+  stock: product.stock,
+  sku: product.sku,
+  category: product.category,
+  subcategory: product.subcategory,
+  brand: product.brand,
+  featured: product.featured,
+  isActive: product.isActive,
+});
+setTags(product.tags || [])
+
+  }
+}, [product]);
+
+
+
+
+
 
   const onSubmit = async (data) => {
      if(productImages.length === 0){
@@ -58,9 +85,12 @@ tags.forEach((tag, index)=> (
 ))
 
 productImages.forEach((image) => {
-  formData.append("images", image.file);
+  if(image.file){
+    formData.append("images", image.file);
+  }
 });
-    await addProduct(formData)
+
+    await updateProduct(formData)
      toast.success("Product updated successfully.");
      navigate("/products", {replace: true})
         }catch(err){
