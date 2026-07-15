@@ -48,7 +48,7 @@ function CartsContainer() {
                 <td className="p-4 text-xs font-bold">#{cart._id.slice(-8)}</td>
                 <td className="p-4">{cart.user ? cart.user.username : "No User"}</td>
                 <td className="p-4 text-gray-500 text-xs">{cart.createdAt}</td>
-                <td className="p-4 flex items-center gap-3">{cart.itemCount}</td>
+                <td className="p-4 flex items-center gap-3 ">{cart.itemCount}</td>
                <td className="p-4">{cart.coupon.code?cart.coupon.code:"No coupon"}</td>
                <td className="p-4 font-semibold">{cart.subtotal?.toFixed(2)} EGP</td>
                 

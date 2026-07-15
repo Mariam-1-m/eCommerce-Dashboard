@@ -10,7 +10,7 @@ import {
   statusClasses,
 } from "../../utils/orderClasses";
 
-export default function OrderView({ order, onClose }) {
+export default function OrderView({ order, onClose, onOrderUpdated }) {
   const [open, setOpen] = useState(false);
 
   const [status, setStatus] = useState(order?.status || "pending");
@@ -41,6 +41,7 @@ export default function OrderView({ order, onClose }) {
 
       setStatus(data.order.status);
       setNote(data.order.adminNote || "");
+      onOrderUpdated?.(data.order);
       setOpen(false);
       onClose();
     } catch (err) {
@@ -101,12 +102,12 @@ export default function OrderView({ order, onClose }) {
               <div className="flex justify-between items-center mb-8">
                 <div className="flex gap-2">
                   <span
-                    className={`${baseStatusClasses} ${statusClasses[order.status] || statusClasses.pending}`}
+                    className={`${baseStatusClasses} ${statusClasses[status] || statusClasses.pending}`}
                   >
                     <span
-                      className={`w-1.5 h-1.5 rounded-full ${pointClasses[order.status] || pointClasses.pending}`}
+                      className={`w-1.5 h-1.5 rounded-full ${pointClasses[status] || pointClasses.pending}`}
                     ></span>
-                    {order.status}
+                    {status}
                   </span>
                   <span
                     className={`${basePaymentClasses} ${paymentClasses[order.paymentStatus] || paymentClasses.pending}`}
