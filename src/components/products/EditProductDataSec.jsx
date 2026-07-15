@@ -229,7 +229,7 @@ productImages.forEach((image) => {
             className="pl-6 mt-2 dark:bg-slate-950 bg-white/90 placeholder:text-slate-400 border dark:border-gray-800 border-slate-200 rounded-xl w-full p-3"
             placeholder="Type a tag and press +"
           />
-          <button onClick={handleClick} type="button" className="rounded-2xl dark:bg-gray-500 bg-gray-400 hover:bg-gray-400 flex items-center justify-center p-4">
+          <button onClick={handleClick} type="button" className="rounded-2xl bg-violet-500 hover:bg-violet-400 flex items-center justify-center p-4">
             <Plus className="text-white"/>
           </button>
         </div>
@@ -270,8 +270,8 @@ productImages.forEach((image) => {
 <div className="border-t dark:border-gray-800 border-slate-50 mt-4">
 <div className="flex items-center gap-3 mt-5">
 <button type="button" className="rounded-xl px-5 py-2.5 text-white text-sm font-semibold dark:bg-slate-800 bg-slate-200">Cancel</button>
-<button type="submit" className={`rounded-xl text-white ${loading? "cursor-not-allowed opacity-50" : "cursor-pointer" } px-5 py-2.5 text-sm font-semibold bg-cyan-500 hover:bg-cyan-400`} disabled={loading}>
-  {loading ? "Creating..." : "Create Product"}
+<button type="submit" className={`rounded-xl text-white ${loading? "cursor-not-allowed opacity-50" : "cursor-pointer" } px-5 py-2.5 text-sm font-semibold bg-violet-500 hover:bg-violet-400`} disabled={loading}>
+  {loading ? "Saving..." : "Save Changes"}
 </button>
 </div>
 </div>

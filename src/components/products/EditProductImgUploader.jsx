@@ -54,8 +54,8 @@ const removeImage=(index)=>{
    </div>
 
    <div className=" flex flex-col gap-1">
-    <h2 className="font-bold text-xl">Gallery</h2>
-    <p>Upload multiple images and preview instantly.</p>
+    <h2 className="font-bold text-xl">Product Gallery</h2>
+    <p>Keep existing images, add new ones, or remove selected assets before saving.</p>
    </div>
 
 
@@ -92,7 +92,7 @@ accept="image/png,image/jpeg,image/webp"
 onClick={()=>fileInput.current.click()}
 className=" dark:bg-slate-950 bg-cyan-50/40 border-dashed border-cyan-400 outline-dashed text-(--text-primary) shadow gap-2 rounded-2xl border  my-15 py-8 flex flex-col justify-around items-center p-5 rounded-5 w-[98%]">
 <ImagePlus className="text-cyan-400"/>
-<h3>Upload Image</h3>
+<h3>Add more images</h3>
 <p>png, JPG, WEBP .multiple files supported </p>
 </button>
 
@@ -100,7 +100,7 @@ className=" dark:bg-slate-950 bg-cyan-50/40 border-dashed border-cyan-400 outlin
 
 <div className="dark:bg-slate-950 bg-slate-50 text-balck dark:text-cyan-100 shadow   border border-(--border-main) p-5 rounded-2xl">
   <h4 className="capitalize flex items-center gap-2"><Astroid size={18} className="" />senior  ui/ux</h4>
-  <p>Optimized product creation experience with responsive designand smooth interactions. </p>
+  <p>Edit without losing the existing product story, while still adding fresh media. </p>
 </div>
 
 
