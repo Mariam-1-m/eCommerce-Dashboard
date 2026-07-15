@@ -44,7 +44,7 @@ const removeImage=(index)=>{
 }
 
   return (
-    <section className="w-full md:w-[47%]   p-3  backdrop:blur-2xl border-slate-200 bg-white/90  shadow-xl shadow-slate-900/5 dark:border-slate-800 dark:bg-slate-900/60 h-auto flex items-around justify-start rounded-3xl  mt-3">
+    <section className="w-full md:w-[47%]   p-3  backdrop:blur-2xl border-slate-200 bg-white/90  shadow-xl shadow-slate-900/5 dark:border-slate-800 dark:bg-slate-900/60 h-auto rounded-3xl mt-8">
      <div className=" m-auto   p-5 w-[98%] flex flex-col  justify-center ">
 
    <div className="flex  items-center gap-3  p-2 rounded-2xl ">
@@ -90,7 +90,7 @@ accept="image/png,image/jpeg,image/webp"
 
 <button 
 onClick={()=>fileInput.current.click()}
-className=" dark:bg-slate-950 bg-cyan-50/40 border-dashed border-cyan-400 outline-dashed text-(--text-primary) shadow gap-2 rounded-2xl border  my-15 py-8 flex flex-col justify-around items-center p-5 rounded-5 w-[98%]">
+className=" dark:bg-slate-950 bg-cyan-50/40 border-dashed border-cyan-400 outline-dashed text-(--text-primary) shadow gap-2 rounded-2xl border my-10 py-8 flex flex-col justify-around items-center p-5 rounded-5 w-[98%]">
 <ImagePlus className="text-cyan-400"/>
 <h3>Add more images</h3>
 <p>png, JPG, WEBP .multiple files supported </p>
@@ -98,8 +98,8 @@ className=" dark:bg-slate-950 bg-cyan-50/40 border-dashed border-cyan-400 outlin
 
 
 
-<div className="dark:bg-slate-950 bg-slate-50 text-balck dark:text-cyan-100 shadow   border border-(--border-main) p-5 rounded-2xl">
-  <h4 className="capitalize flex items-center gap-2"><Astroid size={18} className="" />senior  ui/ux</h4>
+<div className="dark:bg-slate-950 bg-slate-50 text-black dark:text-cyan-100 shadow border border-(--border-main) py-5 px-4 rounded-2xl">
+  <h4 className="capitalize flex items-center gap-2"><Astroid size={18} className="" />senior UX</h4>
   <p>Edit without losing the existing product story, while still adding fresh media. </p>
 </div>
 

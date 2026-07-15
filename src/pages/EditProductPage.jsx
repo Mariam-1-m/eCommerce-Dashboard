@@ -6,8 +6,10 @@ function EditProductPage() {
 return(
   <div className="p-6">
     <EditProductsHeader/>
-    <EditProductImgUploader />
+    <div className="flex">
+    <EditProductImgUploader/>
     <EditProductDataSec />
+    </div>
 
   </div>
 )
