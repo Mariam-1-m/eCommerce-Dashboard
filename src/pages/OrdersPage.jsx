@@ -3,8 +3,8 @@ import Loader from "../components/loader";
 import OrdersHeader from "../components/orders/header";
 import OrdersTable from "../components/orders/ordersTable";
 import FilterItems from "../components/orders/filterItems";
-import { getOrders } from "../services/orderApi";
 import OrderView from "../components/orders/orderView";
+import { getOrders } from "../services/orderApi";
 
 function OrdersPage() {
   const [isLoading, setIsLoading] = useState(true);
@@ -47,6 +47,20 @@ function OrdersPage() {
     fetchData();
   }, [filters]);
 
+  const handleOrderUpdated = (updatedOrder) => {
+    setOrders((prevOrders) =>
+      prevOrders.map((order) =>
+        order._id === updatedOrder._id ? { ...order, ...updatedOrder } : order,
+      ),
+    );
+
+    setSelectedOrder((currentOrder) =>
+      currentOrder?._id === updatedOrder._id
+        ? { ...currentOrder, ...updatedOrder }
+        : currentOrder,
+    );
+  };
+
   if (isLoading) return <Loader />;
 
   return (
@@ -70,6 +84,7 @@ function OrdersPage() {
         <OrderView
           order={selectedOrder}
           onClose={() => setSelectedOrder(null)}
+          onOrderUpdated={handleOrderUpdated}
         />
       )}
     </div>
