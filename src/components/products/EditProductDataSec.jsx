@@ -61,7 +61,7 @@ productImages.forEach((image) => {
   formData.append("images", image.file);
 });
     await addProduct(formData)
-     toast.success("Product created successfully.");
+     toast.success("Product updated successfully.");
      navigate("/products", {replace: true})
         }catch(err){
         toast.error("Something went wrong");
