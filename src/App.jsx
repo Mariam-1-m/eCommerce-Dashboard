@@ -14,14 +14,13 @@ import DashboardPage from "./pages/DashboardPage";
 import LoginPage from "./pages/LoginPage";
 import NotFoundPage from "./pages/404";
 import ProductsPage from "./pages/ProductsPage";
-import AddProduct from "./pages/AddProduct"
-import UsersPage from "./pages/UsersPage"
-import ViewProductDetails from "./pages/ViewProductDetails"
-import  EditProductPage from "./pages/EditProductPage"
-import CartsPage from "./pages/CartsPage"
-import SettingsPage from "./pages/SettingsPage"
-
-
+import AddProduct from "./pages/AddProduct";
+import UsersPage from "./pages/UsersPage";
+import ViewProductDetails from "./pages/ViewProductDetails";
+import EditProductPage from "./pages/EditProductPage";
+import CartsPage from "./pages/CartsPage";
+import SettingsPage from "./pages/SettingsPage";
+import OrdersPage from "./pages/OrdersPage";
 
 function App() {
   return (
@@ -33,17 +32,20 @@ function App() {
               <Route index element={<Navigate replace to="dashboard" />} />
               <Route path="dashboard" element={<DashboardPage />} />
               <Route path="users" element={<UsersPage />} />
-                <Route path="products">
+              <Route path="products">
                 <Route index element={<ProductsPage />} />
-                <Route path="view/:productId" element={<ViewProductDetails/>} />
-                <Route path="edit/:productId" element={< EditProductPage/>} />
+                <Route
+                  path="view/:productId"
+                  element={<ViewProductDetails />}
+                />
+                <Route path="edit/:productId" element={<EditProductPage />} />
                 <Route path="add" element={<AddProduct />} />
               </Route>
-              
-              <Route path="orders" element={<h1>Orders</h1>} />
-              <Route path="carts" element={<CartsPage/>} />
+
+              <Route path="orders" element={<OrdersPage />} />
+              <Route path="carts" element={<CartsPage />} />
               <Route path="wishlist" element={<h1>Wishlist</h1>} />
-              <Route path="settings" element={<SettingsPage/>} />
+              <Route path="settings" element={<SettingsPage />} />
             </Route>
           </Route>
           <Route path="/login" element={<LoginPage />} />
@@ -54,6 +56,5 @@ function App() {
     </>
   );
 }
-
 
 export default App;

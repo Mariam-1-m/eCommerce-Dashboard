@@ -1,6 +1,5 @@
 import api from "../lib/api";
 import { handleError } from "../helpers/handleErrorMSG";
-import { useState } from "react";
 
 export async function getProduct(id) {
   try {
@@ -14,6 +13,19 @@ export async function getProduct(id) {
     }
 
     return data;
+  } catch (error) {
+    return handleError(error);
+  }
+}
+
+export async function updateProduct(id, formData) {
+  try {
+    const res = await api.patch(
+      `https://e-commerce-api-3wara.vercel.app/products/update/${id}`,
+      formData
+    );
+
+    return res.data;
   } catch (error) {
     return handleError(error);
   }
