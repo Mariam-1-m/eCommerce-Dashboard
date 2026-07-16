@@ -44,8 +44,8 @@ function ProductsPage() {
     ) : (
       <div className=' '>
 {isQuickEdit && selectedProduct && (
-  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4">
-    <div className="bg-[#0F172A] w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-3xl flex flex-col md:flex-row gap-6 p-6 shadow-2xl">
+  <div className="fixed inset-0 z-50 flex items-center justify-around bg-white/90 dark:bg-black/90 p-4">
+    <div className="bg-white/90 dark:bg-[#0F172A] w-full max-w-5xl max-h-[90vh] overflow-y-auto  rounded-3xl flex flex-col md:flex-row gap-6 p-6 shadow-2xl">
       <div className="w-full md:w-2/5">
 <QuickGallerySec 
   product={selectedProduct} 

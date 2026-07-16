@@ -27,8 +27,8 @@ console.log(product.images)
 };
 
   return (
-    <section className="bg-slate-900 p-6 rounded-2xl h-full border border-gray-800">
-      <h2 className="text-xl font-bold text-white mb-4">Product Gallery</h2>
+    <section className="bg-slate-50 dark:bg-slate-900 p-6 mt-5 rounded-2xl h-full border border-gray-800">
+      <h2 className="text-xl font-bold text-black dark:text-white mb-4">Product Gallery</h2>
       <div className="grid grid-cols-2 gap-4">
         {product.images?.map((img, index) => (
           <div key={index} className="relative aspect-square rounded-xl overflow-hidden border border-gray-700">

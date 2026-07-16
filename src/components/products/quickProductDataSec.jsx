@@ -80,43 +80,43 @@ const handleSave = async () => {
   }
 };
   return (
-    <div className="w-full text-white p-6 pb-20 space-y-4">
-      <h2 className="text-xl font-bold">Edit Product</h2>
+    <div className="w-full text-white p-6 bg-slate-50 rounded-2xl pb-10  space-y-4">
+      <h2 className="text-xl text-black dark:text-white font-bold">Edit Product</h2>
       
-      <input name="productName" value={formData.productName} onChange={handleChange} className="w-full bg-slate-950 p-2 rounded border border-gray-700" placeholder="Product Name" />
-      <input name="shortDesc" value={formData.shortDesc} onChange={handleChange} className="w-full bg-slate-950 p-2 rounded border border-gray-700" placeholder="Short Description" />
-      <textarea name="description" value={formData.description} onChange={handleChange} className="w-full bg-slate-950 p-2 rounded border border-gray-700 h-20" placeholder="Description" />
+      <input name="productName" value={formData.productName} onChange={handleChange} className="w-full text-gray-700  bg-slate-100 dark:bg-slate-950 p-2 rounded border border-gray-700" placeholder="Product Name" />
+      <input name="shortDesc" value={formData.shortDesc} onChange={handleChange} className="w-full text-gray-700  bg-slate-100 dark:bg-slate-950 p-2 rounded border border-gray-700" placeholder="Short Description" />
+      <textarea name="description" value={formData.description} onChange={handleChange} className="w-full text-gray-700  bg-slate-100 dark:bg-slate-950 p-2 rounded border border-gray-700 h-20" placeholder="Description" />
       
       <div className="grid grid-cols-2 gap-4">
-        <input name="price" type="number" value={formData.price} onChange={handleChange} className="w-full bg-slate-950 p-2 rounded border border-gray-700" placeholder="Price" />
-        <input name="discountPrice" type="number" value={formData.discountPrice} onChange={handleChange} className="w-full bg-slate-950 p-2 rounded border border-gray-700" placeholder="Discount Price" />
+        <input name="price" type="number" value={formData.price} onChange={handleChange} className="w-full text-gray-700  bg-slate-100 dark:bg-slate-950 p-2 rounded border border-gray-700" placeholder="Price" />
+        <input name="discountPrice" type="number" value={formData.discountPrice} onChange={handleChange} className="w-full text-gray-700  bg-slate-100 dark:bg-slate-950 p-2 rounded border border-gray-700" placeholder="Discount Price" />
       </div>
 
       <div className="grid grid-cols-2 gap-4">
-        <input name="stock" type="number" value={formData.stock} onChange={handleChange} className="w-full bg-slate-950 p-2 rounded border border-gray-700" placeholder="Stock" />
-        <input name="sku" value={formData.sku} onChange={handleChange} className="w-full bg-slate-950 p-2 rounded border border-gray-700" placeholder="SKU" />
+        <input name="stock" type="number" value={formData.stock} onChange={handleChange} className="w-full text-gray-700  bg-slate-100 dark:bg-slate-950 p-2 rounded border border-gray-700" placeholder="Stock" />
+        <input name="sku" value={formData.sku} onChange={handleChange} className="w-full text-gray-700  bg-slate-100 dark:bg-slate-950 p-2 rounded border border-gray-700" placeholder="SKU" />
       </div>
 
       <div className="grid grid-cols-2 gap-4">
-        <input name="category" value={formData.category} onChange={handleChange} className="w-full bg-slate-950 p-2 rounded border border-gray-700" placeholder="Category" />
-        <input name="subcategory" value={formData.subcategory} onChange={handleChange} className="w-full bg-slate-950 p-2 rounded border border-gray-700" placeholder="Subcategory" />
+        <input name="category" value={formData.category} onChange={handleChange} className="w-full text-gray-700  bg-slate-100 dark:bg-slate-950 p-2 rounded border border-gray-700" placeholder="Category" />
+        <input name="subcategory" value={formData.subcategory} onChange={handleChange} className="w-full text-gray-700  bg-slate-100 dark:bg-slate-950 p-2 rounded border border-gray-700" placeholder="Subcategory" />
       </div>
 
-      <input name="brand" value={formData.brand} onChange={handleChange} className="w-full bg-slate-950 p-2 rounded border border-gray-700" placeholder="Brand" />
-      <input name="tags" value={formData.tags} onChange={handleChange} className="w-full bg-slate-950 p-2 rounded border border-gray-700" placeholder="Tags (comma separated)" />
+      <input name="brand" value={formData.brand} onChange={handleChange} className="w-full text-gray-700  bg-slate-100 dark:bg-slate-950 p-2 rounded border border-gray-700" placeholder="Brand" />
+      <input name="tags" value={formData.tags} onChange={handleChange} className="w-full text-gray-700  bg-slate-100 dark:bg-slate-950 p-2 rounded border border-gray-700" placeholder="Tags (comma separated)" />
 
       <div className="flex gap-6 pt-2">
-        <label className="flex items-center gap-2 cursor-pointer">
+        <label className="flex items-center gap-2 text-black dark:text-white cursor-pointer">
           <input name="isActive" type="checkbox" checked={formData.isActive} onChange={handleChange} /> Active
         </label>
-        <label className="flex items-center gap-2 cursor-pointer">
-          <input name="isFeatured" type="checkbox" checked={formData.isFeatured} onChange={handleChange} /> Featured
+        <label className="flex text-black dark:text-whiteitems-center gap-2 cursor-pointer">
+          <input name="isFeatured" type="checkbox" checked={formData.isFeatured} onChange={handleChange}  /> Featured
         </label>
       </div>
 
       <div className="flex gap-4 justify-end pt-8">
-        <button onClick={onClose} className="px-6 py-2 bg-slate-800 rounded-lg hover:bg-slate-700">Cancel</button>
-        <button onClick={handleSave} className="px-6 py-2 bg-cyan-600 rounded-lg font-bold hover:bg-cyan-500">Save Changes</button>
+        <button onClick={onClose} className="px-6 py-2  bg-slate-800 rounded-lg hover:bg-slate-700">Cancel</button>
+        <button onClick={handleSave} className="px-6 py-2  bg-cyan-600 rounded-lg font-bold hover:bg-cyan-500">Save Changes</button>
       </div>
     </div>
   );
