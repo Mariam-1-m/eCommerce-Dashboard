@@ -9,14 +9,17 @@ function UsersHeader({setSearch}) {
 
   return (
     <>
-    <div className="rounded-2xl bg-white/90 dark:bg-slate-900/60 max-w-3xl md:mx-auto mt-2 p-5 mx-3">
+    <div className="rounded-2xl bg-white/90 dark:bg-slate-900/60  mt-2 p-5 mx-7 flex flex-col md:flex-row items-stretch md:items-center justify-between">
+    <div>
       <p className="uppercase tracking-[4px] text-sm text-cyan-400 ">
         User Management
       </p>
       <h3 className="text-3xl font-bold py-1">Manage Users</h3>
-
+    </div>
+      
+      <div>
       <div className="flex items-center gap-2">
-        <div className="dark:bg-gray-800 bg-slate-50 relative w-full rounded-xl">
+        <div className="dark:bg-gray-800 bg-slate-50 relative w-full rounded-xl lg:w-80">
           <input
             type="text"
             onChange={(e) => setSearch(e.target.value)}
@@ -28,16 +31,14 @@ function UsersHeader({setSearch}) {
           </div>
         </div>
 
-        <button className="bg-cyan-500 rounded-2xl p-3 flex items-center gap-4" onClick={()=>setClicked((p)=> !p)}>
-          <UserPlus size={18} className="text-white"/>
-          <div className="flex flex-col text-white">
-            <p>Add</p>
-            <p>User</p>
-          </div>
-          <ChevronDown size={18} className={`transition text-white duration-200 ${clicked ? "rotate-180" : ""}`}/>
+        <button className="bg-cyan-500 hover:bg-cyan-600 rounded-2xl p-3 flex items-center gap-2" onClick={()=>setClicked((p)=> !p)}>
+          <UserPlus size={20} className="text-white"/>
+            <span className="whitespace-nowrap font-semibold text-white">Add User</span>
+          <ChevronDown size={20} className={`transition text-white duration-200 ${clicked ? "rotate-180" : ""}`}/>
         </button>
       </div>
     </div>
+      </div>
 
 
   {clicked && (

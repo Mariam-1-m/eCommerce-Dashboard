@@ -7,9 +7,12 @@ function EditProductsHeader() {
   const navigate=useNavigate()
 
   return (
-    <section className="w-[98%]    backdrop:blur-2xl border-slate-200 bg-white/90  shadow-xl shadow-slate-900/5 dark:border-slate-800 dark:bg-slate-900/60  h-107.5 md:h-87.5 flex p-5 m-auto  rounded-2xl  text-(--text-primary)">
+    <section className="w-[98%]   backdrop:blur-2xl border-slate-200 bg-white/90  shadow-xl shadow-slate-900/5 dark:border-slate-800 dark:bg-slate-900/60  h-auto md:h-aut0 flex p-5 rounded-3xl text-(--text-primary)">
     <div className="w-full">
-    <button onClick={()=>{navigate('/products');
+   
+<div className='flex items-end justify-between'>
+     <div>
+     <button onClick={()=>{navigate('/products');
       
     }} className="bg-(--bg-primary) font-bold hover:bg-gray-200 dark:hover:bg-gray-800 text-sm flex px-4 py-2 border border-(--border-main) rounded-3xl  justify-center text-(--text-primary) items-center"><ArrowLeft className="text-sm mr-2" /> Back to products</button>
 
@@ -23,12 +26,15 @@ function EditProductsHeader() {
     </div>
    </div>
 
-   <p className="text-(--text-primary) ml-3">Review the current product data, add new images, remove existing ones, and save your updates safely.</p>
+   <p className="text-(--text-primary) ml-3">Review the current product data, add new images, remove existing ones, and save your </p>
+   <p className='text-(--text-primary) ml-3'>updates safely.</p>
+   </div>
     
-    <div className="dark:bg-slate-950 bg-slate-50 flex  flex-col gap-1 py-3 px-4 my-5 rounded-2xl border dark:border-(--border-main) border-gray-300">
+    <div className="dark:bg-slate-950 bg-slate-50 flex  flex-col gap-1 p-5 rounded-4xl border dark:border-(--border-main) border-gray-300">
       <h4 className="text-cyan-400">Live</h4>
       <p>Connected to the real product update API.</p>
     </div>
+</div>
 
 
 
