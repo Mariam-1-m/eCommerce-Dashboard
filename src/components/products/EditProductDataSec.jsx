@@ -7,7 +7,7 @@ import { replace, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 
-function EditProductDataSec({productImages, updateProduct, product}) {
+function EditProductDataSec({productImages, updateProduct, product, deletedImages}) {
       const [loading, setLoading] = useState(false);
       const [tag, setTag] = useState("");
       const [tags, setTags] = useState([]);
@@ -89,6 +89,13 @@ productImages.forEach((image) => {
     formData.append("images", image.file);
   }
 });
+
+
+formData.append(
+  "deletedImages",
+  JSON.stringify(deletedImages)
+);
+
 
     await updateProduct(formData)
      toast.success("Product updated successfully.");

@@ -5,7 +5,7 @@ import React, { useEffect } from "react";
 import {useState, useRef} from "react";
 import { toast } from "react-toastify";
 
-function EditProductImgUploader({onImagesChange, product}) {
+function EditProductImgUploader({onImagesChange, product, onDeletedImagesChange}) {
 const fileInput=useRef(null);
 const [images,setImages]=useState([]);
 
@@ -16,6 +16,7 @@ useEffect(()=>{
     {
       file: null,
       preview: image.url,
+      public_id: image.public_id,
       num: index + 1,
     }
    ))
@@ -52,6 +53,10 @@ console.log(updatedImages);
 }
 
 const removeImage=(index)=>{
+    const image = images[index];
+      if (!image.file && image.public_id) {
+    onDeletedImagesChange((prev) => [...prev, image.public_id]);
+  }
    const filteredImages =images.filter((_,i)=>i!==index)
     URL.revokeObjectURL(images[index].preview);
       setImages(filteredImages);
