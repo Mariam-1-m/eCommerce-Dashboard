@@ -38,7 +38,7 @@ function ProductsStatsCard() {
 
   return (
     <section className="mx-9 mt-8">
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-4">
         
         <div className="rounded-2xl border border-[var(--border-main)]  bg-white/90 dark:bg-slate-900/60 p-6 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-cyan-500/10">
           <div className="flex items-center justify-between">
