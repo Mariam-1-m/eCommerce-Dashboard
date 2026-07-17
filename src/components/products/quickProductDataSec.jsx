@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import api from "../../lib/api";
 
-function QuickProductDataSec({ product, onClose, onUpdate }) {
+function QuickProductDataSec({
+  product,
+  deletedImages = [],
+  onClose,
+  onUpdate,
+}) {
   const [formData, setFormData] = useState({
     productName: "",
     shortDesc: "",
@@ -17,7 +22,6 @@ function QuickProductDataSec({ product, onClose, onUpdate }) {
     isFeatured: false,
     isActive: false,
   });
-  console.log(product);
   useEffect(() => {
     if (product) {
       setFormData({
@@ -50,36 +54,55 @@ function QuickProductDataSec({ product, onClose, onUpdate }) {
   const handleSave = async () => {
     try {
       const token = localStorage.getItem("token");
+      const requestData = new FormData();
 
-      const validImages = (product.images || []).filter(
-        (img) => img.url && !img.url.startsWith("blob:"),
+      requestData.append("name", formData.productName);
+      requestData.append("shortDescription", formData.shortDesc);
+      requestData.append("description", formData.description);
+      requestData.append("price", String(parseFloat(formData.price) || 0));
+      requestData.append(
+        "discountPrice",
+        String(parseFloat(formData.discountPrice) || 0),
       );
+      requestData.append("stock", String(parseInt(formData.stock) || 0));
+      requestData.append("sku", formData.sku || "");
+      requestData.append("category", formData.category || "");
+      requestData.append("subcategory", formData.subcategory || "");
+      requestData.append("brand", formData.brand || "");
+      requestData.append("isActive", String(formData.isActive));
+      requestData.append("featured", String(formData.isFeatured));
 
-      const payload = {
-        name: formData.productName,
-        shortDescription: formData.shortDesc,
-        description: formData.description,
-        price: parseFloat(formData.price) || 0,
-        discountPrice: parseFloat(formData.discountPrice) || 0,
-        stock: parseInt(formData.stock) || 0,
-        sku: formData.sku,
-        category: formData.category,
-        subcategory: formData.subcategory,
-        brand: formData.brand,
-        tags:
-          typeof formData.tags === "string"
-            ? formData.tags.split(",").map((t) => t.trim())
-            : formData.tags,
-        isActive: formData.isActive,
-        featured: formData.isFeatured,
-        images: validImages,
-      };
+      const tags =
+        typeof formData.tags === "string"
+          ? formData.tags
+              .split(",")
+              .map((tag) => tag.trim())
+              .filter(Boolean)
+          : formData.tags || [];
 
-      console.log("SENDING CLEAN PAYLOAD:", payload);
-
-      const res = await api.patch(`/products/update/${product._id}`, payload, {
-        headers: { Authorization: `Bearer ${token}` },
+      tags.forEach((tag, index) => {
+        requestData.append(`tags[${index}]`, tag);
       });
+
+      (product.images || []).forEach((img) => {
+        if (img?.file) {
+          requestData.append("images", img.file);
+        }
+      });
+
+      deletedImages.forEach((id) => {
+        requestData.append("deletedImages", JSON.stringify(deletedImages));
+      });
+
+      const res = await api.patch(
+        `/products/update/${product._id}`,
+        requestData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
 
       const updatedProduct = res.data.product || res.data;
 

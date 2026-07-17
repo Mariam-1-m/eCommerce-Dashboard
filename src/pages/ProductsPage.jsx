@@ -15,6 +15,7 @@ function ProductsPage() {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [deletedImages, setDeletedImages] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isQuickEdit, setIsQuickEdit] = useState(true);
@@ -48,17 +49,19 @@ function ProductsPage() {
             <div className="w-full md:w-2/5">
               <QuickGallerySec
                 product={selectedProduct}
+                setDeletedImages={setDeletedImages}
                 onImagesChange={(updatedImages) => {
                   setSelectedProduct((prevProduct) => ({
                     ...prevProduct,
                     images: updatedImages,
                   }));
                 }}
-              />{" "}
+              />
             </div>
             <div className="w-full md:w-3/5">
               <QuickProductDataSec
                 product={selectedProduct}
+                deletedImages={deletedImages}
                 onClose={() => setIsQuickEdit(false)}
                 onUpdate={(updated) => {
                   setProducts((prev) =>
