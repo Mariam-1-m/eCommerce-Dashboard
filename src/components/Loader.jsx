@@ -1,5 +1,3 @@
-import React from "react";
-
 function Loader() {
   return (
     <div className="flex flex-col gap-y-4 items-center justify-center min-h-screen bg-(--bg-primary)">

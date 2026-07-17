@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { ArrowLeft, Eye } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
 import NotFoundPage from "./404";
-import Loader from "../components/loader";
+import Loader from "../components/Loader";
 import ProductsGallerySec from "../components/products/gallerySec";
 import ProductsDataSec from "../components/products/dataSec";
 import { getProduct } from "../services/productsApi";

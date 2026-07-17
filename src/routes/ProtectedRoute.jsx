@@ -1,6 +1,6 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
-import Loader from "../components/loader";
+import Loader from "../components/Loader";
 import AccessDenied from "../components/access-denied";
 
 function ProtectedRoute() {

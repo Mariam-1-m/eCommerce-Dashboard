@@ -9,7 +9,7 @@ import ProtectedRoute from "./routes/ProtectedRoute";
 import AppLayout from "./components/AppLayout";
 import "./App.css";
 import { ToastContainer } from "react-toastify";
-import Loader from "./components/loader";
+import Loader from "./components/Loader";
 import DashboardPage from "./pages/DashboardPage";
 import LoginPage from "./pages/LoginPage";
 import NotFoundPage from "./pages/404";
